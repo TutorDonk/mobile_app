@@ -1,20 +1,30 @@
 package com.bangkit.tutordonk
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        val slideInAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_in_bottom)
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+
+        val logo = findViewById<ImageView>(R.id.logo)
+        val welcomeText = findViewById<TextView>(R.id.welcome_text)
+        val googleSignInButton = findViewById<MaterialButton>(R.id.google_sign_in_button)
+        val registerButton = findViewById<MaterialButton>(R.id.register_button)
+
+        logo.startAnimation(fadeInAnimation)
+        welcomeText.startAnimation(fadeInAnimation)
+        googleSignInButton.startAnimation(slideInAnimation)
+        registerButton.startAnimation(slideInAnimation)
     }
 }
+

@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">TutorDon</string>
+    <string name="app_name">TutorDonk</string>
+    <string name="welcome_message">Welcome to TutorDonk</string>
+    <string name="google_sign_in">Sign in with Google</string>
+    <string name="register">Register</string>
+    <string name="or">OR</string>
+    <string name="logo_description">App Logo</string>
 </resources>
