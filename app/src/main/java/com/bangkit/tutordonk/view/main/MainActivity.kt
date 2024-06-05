@@ -1,5 +1,6 @@
 package com.bangkit.tutordonk.view.main
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
@@ -9,8 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.tutordonk.R
+import com.bangkit.tutordonk.view.register.RegisterActivity
 import com.google.android.material.button.MaterialButton
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setupView()
     }
 
-    private fun setupComponent(){
+    private fun setupComponent() {
         val slideInAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_in_bottom)
         val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
 
@@ -35,8 +36,12 @@ class MainActivity : AppCompatActivity() {
         welcomeText.startAnimation(fadeInAnimation)
         googleSignInButton.startAnimation(slideInAnimation)
         registerButton.startAnimation(slideInAnimation)
-    }
 
+        registerButton.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
     private fun setupView() {
         @Suppress("DEPRECATION")
@@ -51,4 +56,3 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 }
-

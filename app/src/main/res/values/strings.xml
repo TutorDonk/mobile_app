@@ -4,5 +4,19 @@
     <string name="google_sign_in">Sign in with Google</string>
     <string name="register">Register</string>
     <string name="or">OR</string>
+    <string name="role_prompt">Select Role</string>
+    <string-array name="roles_array">
+        <item>Siswa</item>
+        <item>Pengajar</item>
+    </string-array>
     <string name="logo_description">App Logo</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="parent_s_phone_number">Parent\'s Phone Number</string>
+    <string name="parent_s_name">Parent\'s Name</string>
+    <string name="education_level">Education Level</string>
+    <string name="subjects_comma_separated">Subjects (comma-separated)</string>
+    <string name="certifications_achievements_comma_separated">Certifications/Achievements (comma-separated)</string>
+    <string name="kelas">Class</string>
+    <string name="dropdown_icon">Dropdown Icon</string>
 </resources>
