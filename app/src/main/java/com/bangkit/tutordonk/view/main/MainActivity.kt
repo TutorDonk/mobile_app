@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.tutordonk.R
+import com.bangkit.tutordonk.view.home.StudentHomeActivity
 import com.bangkit.tutordonk.view.register.RegisterActivity
 import com.google.android.material.button.MaterialButton
 
@@ -39,6 +40,11 @@ class MainActivity : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        googleSignInButton.setOnClickListener {
+            val intent = Intent(this, StudentHomeActivity::class.java)
             startActivity(intent)
         }
     }
