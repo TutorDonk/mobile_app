@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/green_light">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TheJakartaSans.Bold.22sp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title Forum" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            style="@style/TheJakartaSans.SemiBold.18sp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="4dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toTopOf="@+id/tv_like"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="Subtitle Forum" />
+
+        <TextView
+            android:id="@+id/tv_like"
+            style="@style/TheJakartaSans.Regular.16sp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_heart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_comments"
+            tools:text="770" />
+
+        <TextView
+            android:id="@+id/tv_comments"
+            style="@style/TheJakartaSans.Regular.16sp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_comments"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="145" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TheJakartaSans">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/plusjakartasans</item>
+    </style>
+
+    <style name="TheJakartaSans.Regular" parent="TheJakartaSans">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TheJakartaSans.Bold" parent="TheJakartaSans">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TheJakartaSans.Light" parent="TheJakartaSans">
+        <item name="fontWeight">300</item>
+    </style>
+
+    <style name="TheJakartaSans.Medium" parent="TheJakartaSans">
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="TheJakartaSans.SemiBold" parent="TheJakartaSans">
+        <item name="fontWeight">600</item>
+    </style>
+
+    <style name="TheJakartaSans.Regular.12sp">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Regular.16sp">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Bold.13sp">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Bold.16sp">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Bold.22sp">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Bold.28sp">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Bold.32sp">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Light.16sp">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Medium.11sp">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="TheJakartaSans.Medium.12sp">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TheJakartaSans.SemiBold.12sp">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TheJakartaSans.SemiBold.14sp">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TheJakartaSans.SemiBold.18sp">
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>

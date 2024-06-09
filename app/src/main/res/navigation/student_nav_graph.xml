@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bangkit.tutordonk.view.student.home.StudentDashboardFragment"
+        android:label="Home Fragment"
+        tools:layout="@layout/fragment_student_dashboard">
+
+        <action
+            android:id="@+id/homeFragmentTobookingTutorFragment"
+            app:destination="@+id/bookingTutorFragment" />
+
+        <action
+            android:id="@+id/homeFragmentTostudyForumFragment"
+            app:destination="@+id/studyForumFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookingTutorFragment"
+        android:name="com.bangkit.tutordonk.view.student.booking.BookingTutorFragment"
+        android:label="Booking Tutor Fragment"
+        tools:layout="@layout/fragment_student_booking_tutor" />
+
+    <fragment
+        android:id="@+id/studyForumFragment"
+        android:name="com.bangkit.tutordonk.view.student.study.StudyForumFragment"
+        android:label="Study Forum Fragment"
+        tools:layout="@layout/fragment_student_study_forum">
+
+        <action
+            android:id="@+id/studyForumFragmenttoDetailForumFragment"
+            app:destination="@+id/detailForumFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailForumFragment"
+        android:name="com.bangkit.tutordonk.view.student.study.detail.DetailForumFragment"
+        android:label="Detail Forum Fragment"
+        tools:layout="@layout/fragment_detail_forum" />
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.bangkit.tutordonk.view.student.editprofile.StudentEditProfileFragment"
+        android:label="Student Edit Profile Fragment"
+        tools:layout="@layout/fragment_student_edit_profile" />
+</navigation>

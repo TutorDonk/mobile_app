@@ -13,13 +13,13 @@
         android:theme="@style/Theme.TutorDon"
         tools:targetApi="31">
         <activity
-            android:name=".view.home.StudentHomeActivity"
+            android:name=".view.student.StudentHomeActivity"
             android:exported="false" />
         <activity
             android:name=".view.register.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.MainActivity"
+            android:name=".view.onboarding.OnboardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

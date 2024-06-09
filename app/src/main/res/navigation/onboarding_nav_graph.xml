@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding_nav_graph"
+    app:startDestination="@id/onboardingMainFragment">
+
+    <fragment
+        android:id="@+id/onboardingMainFragment"
+        android:name="com.bangkit.tutordonk.view.onboarding.onboarding.OnboardingMainFragment"
+        android:label="OnboardingMain Fragment"
+        tools:layout="@layout/fragment_onboarding_main">
+
+        <action
+            android:id="@+id/onboardingMainFragmentToLoginFragment"
+            app:destination="@+id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.bangkit.tutordonk.view.onboarding.onboarding.OnboardingFragment"
+        android:label="Onboarding Fragment"
+        tools:layout="@layout/fragment_onboarding"/>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.bangkit.tutordonk.view.onboarding.login.LoginFragment"
+        android:label="Login Fragment"
+        tools:layout="@layout/fragment_login" >
+
+        <action
+            android:id="@+id/loginFragmentToRegisterFragment"
+            app:destination="@+id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.bangkit.tutordonk.view.onboarding.register.RegisterFragment"
+        android:label="Register Fragment"
+        tools:layout="@layout/fragment_register" />
+</navigation>

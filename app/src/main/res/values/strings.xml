@@ -19,4 +19,63 @@
     <string name="certifications_achievements_comma_separated">Certifications/Achievements (comma-separated)</string>
     <string name="kelas">Class</string>
     <string name="dropdown_icon">Dropdown Icon</string>
+
+
+    <string name="cd_logo">Logo</string>
+    <string name="cd_active_indicator">icon of active indicator</string>
+    <string name="onboarding_title_skip">Skip</string>
+    <string name="cd_img_onboarding">Image of Onboarding Step</string>
+    <string name="onboarding_title_certification_and_badges">Certification and Badges</string>
+    <string name="onboarding_subtitle_certification_and_badges">Earn a certificate after completion of every course</string>
+    <string name="cd_button_next">Button Next</string>
+    <string name="login_title_login">Login</string>
+    <string name="login_hint_email">demo@gmail.com</string>
+    <string name="login_hint_password">********</string>
+    <string name="login_title_password">Password</string>
+    <string name="login_title_forgot_password">Forgot Password ?</string>
+    <string name="register_title_sign_up">Sign Up</string>
+    <string name="dashboard_greeting">Helo, %s</string>
+    <string name="cd_notification">icon of notification</string>
+    <string name="home_user_title_booking_tutor">Booking Tutor</string>
+    <string name="home_user_title_history_study">Riwayat Belajar</string>
+    <string name="home_user_title_find_tutor">Cari Tutor</string>
+    <string name="home_user_forum_tutor">Forum Belajar</string>
+    <string name="desc_spinner_icon">Icon of Spinner</string>
+    <string name="booking_tutor_title_select_sub_study">Apakah kamu mau memilih sub mata pelajaran tertentu?</string>
+    <string name="booking_tutor_btn_booking_now">Booking Now</string>
+    <string name="cd_comments">icon of comments</string>
+    <string name="cd_sort">icon of sort</string>
+    <string name="detail_forum_title_creator_comment">Pembuat Komentar</string>
+    <string name="user_edit_profile_btn_update">Update</string>
+
+
+    <string-array name="list_study_array">
+        <item>Kalkulus</item>
+        <item>B Inggris</item>
+        <item>Algoritma Dasar</item>
+    </string-array>
+
+    <string-array name="list_sub_study_kalkulus_array">
+        <item>Sub Kalkulus</item>
+    </string-array>
+
+    <string-array name="list_sub_study_algorithm_array">
+        <item>Sub Algoritma Dasar</item>
+    </string-array>
+
+    <string-array name="list_sub_study_b_english_array">
+        <item>Sub B Inggris</item>
+    </string-array>
+
+    <string-array name="list_tutor_array">
+        <item>Prof. Hamka</item>
+        <item>Prof. Yusuf</item>
+        <item>Prof. Rocky</item>
+    </string-array>
+
+    <string-array name="list_sort">
+        <item>Popularitas</item>
+        <item>Like</item>
+        <item>Comment</item>
+    </string-array>
 </resources>

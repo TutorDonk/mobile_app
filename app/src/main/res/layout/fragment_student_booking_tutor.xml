@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="24dp" />
+
+    <com.bangkit.tutordonk.view.component.CustomSpinner
+        android:id="@+id/spinner_study"
+        style="@style/BaseSpinnerStyle"
+        android:backgroundTint="@color/brown_light"
+        android:entries="@array/list_study_array"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/mcb_select_sub_study"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/booking_tutor_title_select_sub_study"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@+id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/spinner_study" />
+
+    <com.bangkit.tutordonk.view.component.CustomSpinner
+        android:id="@+id/spinner_sub_study"
+        style="@style/BaseSpinnerStyle"
+        android:layout_marginTop="8dp"
+        android:entries="@array/list_sub_study_kalkulus_array"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/mcb_select_sub_study" />
+
+    <com.bangkit.tutordonk.view.component.CustomSpinner
+        android:id="@+id/spinner_select_tutor"
+        style="@style/BaseSpinnerStyle"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/brown_light"
+        android:entries="@array/list_tutor_array"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/spinner_sub_study" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/CustomButton"
+        android:layout_marginTop="40dp"
+        android:text="@string/booking_tutor_btn_booking_now"
+        android:backgroundTint="@color/green_light"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/spinner_select_tutor" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
