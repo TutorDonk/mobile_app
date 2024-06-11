@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/teacher_nav_graph"
+    app:startDestination="@id/teacherHomeFragment">
+
+
+    <fragment
+        android:id="@+id/teacherHomeFragment"
+        android:name="com.bangkit.tutordonk.view.teacher.home.TeacherDashboardFragment"
+        android:label="Teacher Dashboard Fragment"
+        tools:layout="@layout/fragment_teacher_dashboard" />
+
+    <fragment
+        android:id="@+id/teacherHistoryFragment"
+        android:name="com.bangkit.tutordonk.view.teacher.history.TeacherHistoryStudyFragment"
+        android:label="Teacher History Fragment"
+        tools:layout="@layout/fragment_teacher_history_study" />
+
+    <fragment
+        android:id="@+id/teacherEditProfileFragment"
+        android:name="com.bangkit.tutordonk.view.teacher.editprofile.TeacherEditProfileFragment"
+        android:label="Teacher Edit Profile Fragment"
+        tools:layout="@layout/fragment_teacher_edit_profile" />
+
+    <fragment
+        android:id="@+id/teacherTutorManagement"
+        android:name="com.bangkit.tutordonk.view.teacher.tutormanagement.TeacherTutorManagementFragment"
+        android:label="Teacher Tutor Management Fragment"
+        tools:layout="@layout/fragment_teacher_tutor_management" />
+</navigation>

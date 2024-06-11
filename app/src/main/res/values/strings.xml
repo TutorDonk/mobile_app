@@ -47,7 +47,19 @@
     <string name="cd_sort">icon of sort</string>
     <string name="detail_forum_title_creator_comment">Pembuat Komentar</string>
     <string name="user_edit_profile_btn_update">Update</string>
-
+    <string name="popup_desc_icon_close">Icon popup close</string>
+    <string name="popup_title_comments">Berikan Komentarmu</string>
+    <string name="popup_btn_send">Kirim</string>
+    <string name="student_booking_rating_tutor">Rating Tutor</string>
+    <string name="student_booking_report_tutor">Lapor Tutor</string>
+    <string name="student_booking_chat">Chat Via Whatsapp</string>
+    <string name="cd_stars">icon of stars</string>
+    <string name="popup_hint_desc">Deskripsi</string>
+    <string name="popup_hint_reason">Alasan</string>
+    <string name="teacher_user_title_history_study">Riwayat mengajar</string>
+    <string name="teacher_user_title_tutor_management">Tutor management</string>
+    <string name="tutor_management_btn_reject">Reject</string>
+    <string name="tutor_management_btn_accept">Accept</string>
 
     <string-array name="list_study_array">
         <item>Kalkulus</item>
@@ -73,9 +85,20 @@
         <item>Prof. Rocky</item>
     </string-array>
 
+    <string-array name="list_violation_array">
+        <item>Tidak Kompeten</item>
+        <item>Sering Tidak Hadir</item>
+        <item>Sering Telat</item>
+    </string-array>
+
     <string-array name="list_sort">
         <item>Popularitas</item>
         <item>Like</item>
         <item>Comment</item>
+    </string-array>
+
+    <string-array name="list_sort_history">
+        <item>Matkul</item>
+        <item>Status</item>
     </string-array>
 </resources>

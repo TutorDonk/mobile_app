@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.tutordonk.R
 import com.bangkit.tutordonk.view.home.StudentHomeActivity
 import com.bangkit.tutordonk.view.register.RegisterActivity
+import com.bangkit.tutordonk.view.teacher.TeacherActivity
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {

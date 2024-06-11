@@ -1,25 +1,26 @@
-package com.bangkit.tutordonk.view.student
+package com.bangkit.tutordonk.view.teacher
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.bangkit.tutordonk.R
-import com.bangkit.tutordonk.databinding.ActivityStudentHomeBinding
+import com.bangkit.tutordonk.databinding.ActivityTeacherBinding
 import com.bangkit.tutordonk.view.navigateWithAnimation
+import com.bangkit.tutordonk.view.student.StudentHomeActivity
 
-class StudentHomeActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityStudentHomeBinding
+class TeacherActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityTeacherBinding
 
     private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStudentHomeBinding.inflate(layoutInflater)
+
+        binding = ActivityTeacherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.fcv_home_user) as NavHostFragment
+            .findFragmentById(R.id.fcv_home_teacher) as NavHostFragment
         navController = navHostFragment.navController
 
         setupUI()
@@ -27,16 +28,12 @@ class StudentHomeActivity : AppCompatActivity() {
 
     private fun setupUI() {
         with(binding) {
-            tvGreeting.text = getString(R.string.dashboard_greeting, intent.getStringExtra(NAME))
+            tvGreeting.text = getString(R.string.dashboard_greeting, intent.getStringExtra(StudentHomeActivity.NAME))
             tvGreeting.setOnClickListener {
-                if (navController.currentDestination?.id != R.id.editProfileFragment) {
-                    navController.navigateWithAnimation(R.id.editProfileFragment)
+                if (navController.currentDestination?.id != R.id.teacherEditProfileFragment) {
+                    navController.navigateWithAnimation(R.id.teacherEditProfileFragment)
                 }
             }
         }
-    }
-
-    companion object {
-        const val NAME = "NAME"
     }
 }

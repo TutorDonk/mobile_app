@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.student.study
+package com.bangkit.tutordonk.view.student.study.forum
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.bangkit.tutordonk.R
 import com.bangkit.tutordonk.databinding.FragmentStudentStudyForumBinding
 import com.bangkit.tutordonk.view.component.forumrecyclerview.model.ForumItem
 import com.bangkit.tutordonk.view.navigateWithAnimation
-import com.bangkit.tutordonk.view.student.study.detail.DetailForumFragment.Companion.ARG_FORUM_ITEM
+import com.bangkit.tutordonk.view.student.study.forum.detail.DetailForumFragment.Companion.ARG_FORUM_ITEM
 import com.google.gson.Gson
 
 class StudyForumFragment : Fragment() {

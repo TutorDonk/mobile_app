@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/studyForumFragment"
-        android:name="com.bangkit.tutordonk.view.student.study.StudyForumFragment"
+        android:name="com.bangkit.tutordonk.view.student.study.forum.StudyForumFragment"
         android:label="Study Forum Fragment"
         tools:layout="@layout/fragment_student_study_forum">
 
@@ -38,9 +38,15 @@
 
     <fragment
         android:id="@+id/detailForumFragment"
-        android:name="com.bangkit.tutordonk.view.student.study.detail.DetailForumFragment"
+        android:name="com.bangkit.tutordonk.view.student.study.forum.detail.DetailForumFragment"
         android:label="Detail Forum Fragment"
         tools:layout="@layout/fragment_detail_forum" />
+
+    <fragment
+        android:id="@+id/studyHistoryFragment"
+        android:name="com.bangkit.tutordonk.view.student.study.history.StudentStudyHistoryFragment"
+        android:label="Student History Fragment"
+        tools:layout="@layout/fragment_student_study_history"/>
 
     <fragment
         android:id="@+id/editProfileFragment"

@@ -9,12 +9,14 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.bangkit.tutordonk.databinding.FragmentRegisterBinding
 import com.bangkit.tutordonk.view.student.StudentHomeActivity
+import com.bangkit.tutordonk.view.teacher.TeacherActivity
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
     private var name = ""
+    private var isSiswa = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +39,7 @@ class RegisterFragment : Fragment() {
     private fun setLayoutListener() = with(binding) {
         spinnerRole.setOnItemSelectedListener {
             name = it
-            val isSiswa = it.lowercase() == "siswa"
+            isSiswa = it.lowercase() == "siswa"
             groupStudent.visibility = if (isSiswa) View.VISIBLE else View.GONE
             groupTeacher.visibility = if (isSiswa.not()) View.VISIBLE else View.GONE
 
@@ -60,10 +62,14 @@ class RegisterFragment : Fragment() {
         }
 
         btnRegister.setOnClickListener {
-            startActivity(Intent(requireContext(), StudentHomeActivity::class.java).apply {
-                this.putExtra(StudentHomeActivity.NAME, name)
-                setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            })
+            startActivity(
+                Intent(
+                    requireContext(),
+                    if (isSiswa) StudentHomeActivity::class.java else TeacherActivity::class.java
+                ).apply {
+                    this.putExtra(StudentHomeActivity.NAME, name)
+                    setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                })
         }
     }
 

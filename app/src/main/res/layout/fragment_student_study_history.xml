@@ -18,14 +18,14 @@
         style="@style/BaseSpinnerStyle"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:entries="@array/list_sort"
+        android:entries="@array/list_sort_history"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_sort" />
 
-    <com.bangkit.tutordonk.view.component.forumrecyclerview.ForumRecyclerView
-        android:id="@+id/rv_forum"
+    <com.bangkit.tutordonk.view.component.historyrecyclerview.HistoryRecyclerView
+        android:id="@+id/rv_history"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8sp"

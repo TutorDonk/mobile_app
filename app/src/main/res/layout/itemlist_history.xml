@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     app:cardBackgroundColor="@color/green_light"
     app:cardCornerRadius="16dp">
@@ -13,61 +13,55 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tv_status"
+            style="@style/TheJakartaSans.Regular.12sp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="@color/bg_popup_grey"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Status booking tutor" />
+
+        <TextView
             android:id="@+id/tv_title"
             style="@style/TheJakartaSans.Bold.22sp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
             android:background="@drawable/bg_rectangle"
             android:backgroundTint="@color/bg_popup_grey"
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title Forum" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_status"
+            tools:text="Mata Pelajaran" />
 
         <TextView
             android:id="@+id/tv_subtitle"
             style="@style/TheJakartaSans.SemiBold.18sp"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginVertical="4dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/bg_rectangle"
             android:backgroundTint="@color/bg_popup_grey"
-            android:ellipsize="end"
-            android:maxLines="3"
             android:padding="8dp"
-            android:textAlignment="textStart"
-            app:layout_constraintBottom_toTopOf="@+id/tv_like"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="Subtitle Forum" />
+            tools:text="Nama Tutor" />
 
         <TextView
-            android:id="@+id/tv_like"
-            style="@style/TheJakartaSans.Regular.16sp"
+            android:id="@+id/tv_time"
+            style="@style/TheJakartaSans.Regular.12sp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="8dp"
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_heart"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_comments"
-            tools:text="770" />
-
-        <TextView
-            android:id="@+id/tv_comments"
-            style="@style/TheJakartaSans.Regular.16sp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="8dp"
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_comments"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="@color/bg_popup_grey"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="145" />
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+            tools:text="Waktu pelaksanaan" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -19,4 +19,10 @@
     <color name="gray_600">#FF757575</color>
     <color name="brown_light">#BDACAC</color>
     <color name="green_light">#ADD188</color>
+    <color name="bg_popup_grey">#D9D9D9</color>
+    <color name="btn_green">#3ECF44</color>
+    <color name="btn_red">#CF473E</color>
+    <color name="bg_brown">#A38D8D</color>
+    <color name="bg_card_yellow">#E5CF96</color>
+    <color name="bg_btn_green">#6ECC71</color>
 </resources>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/bg_brown"
+    android:padding="16dp"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/popup_desc_icon_close"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/TheJakartaSans.SemiBold.18sp.white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_close"
+            tools:text="Nama Tutor" />
+
+        <ImageView
+            android:id="@+id/iv_stars1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/cd_stars"
+            android:src="@drawable/ic_stars"
+            app:layout_constraintEnd_toStartOf="@+id/iv_stars2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+        <ImageView
+            android:id="@+id/iv_stars2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/cd_stars"
+            android:src="@drawable/ic_stars"
+            app:layout_constraintEnd_toStartOf="@+id/iv_stars3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_stars1"
+            app:layout_constraintTop_toTopOf="@id/iv_stars1" />
+
+        <ImageView
+            android:id="@+id/iv_stars3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/cd_stars"
+            android:src="@drawable/ic_stars"
+            app:layout_constraintEnd_toStartOf="@+id/iv_stars4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_stars2"
+            app:layout_constraintTop_toTopOf="@id/iv_stars1" />
+
+        <ImageView
+            android:id="@+id/iv_stars4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/cd_stars"
+            android:src="@drawable/ic_stars"
+            app:layout_constraintEnd_toStartOf="@+id/iv_stars5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_stars3"
+            app:layout_constraintTop_toTopOf="@id/iv_stars1" />
+
+        <ImageView
+            android:id="@+id/iv_stars5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/cd_stars"
+            android:src="@drawable/ic_stars"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_stars4"
+            app:layout_constraintTop_toTopOf="@id/iv_stars1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_reason"
+            style="@style/CustomTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="16dp"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/iv_stars1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_reason"
+                style="@style/CustomEditText"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:hint="@string/popup_hint_reason"
+                android:imeOptions="actionNext"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_send"
+            style="@style/CustomButton"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/green_light"
+            android:text="@string/popup_btn_send"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_reason" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

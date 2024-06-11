@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.student.study
+package com.bangkit.tutordonk.view.student.study.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,16 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bangkit.tutordonk.R
-import com.bangkit.tutordonk.databinding.FragmentStudentStudyForumBinding
-import com.bangkit.tutordonk.view.component.forumrecyclerview.model.ForumItem
+import com.bangkit.tutordonk.databinding.FragmentStudentStudyHistoryBinding
+import com.bangkit.tutordonk.view.component.historyrecyclerview.model.HistoryItem
 import com.bangkit.tutordonk.view.navigateWithAnimation
-import com.bangkit.tutordonk.view.student.study.detail.DetailForumFragment.Companion.ARG_FORUM_ITEM
+import com.bangkit.tutordonk.view.student.booking.BookingTutorFragment
 import com.google.gson.Gson
 
-class StudyForumFragment : Fragment() {
-
-    private var _binding: FragmentStudentStudyForumBinding? = null
+class StudentStudyHistoryFragment : Fragment() {
+    private var _binding: FragmentStudentStudyHistoryBinding? = null
     private val binding get() = _binding!!
+
     private var isSortClicked = false
     private var spinnerInteracted = false
     private lateinit var navController: NavController
@@ -27,7 +27,7 @@ class StudyForumFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStudentStudyForumBinding.inflate(inflater, container, false)
+        _binding = FragmentStudentStudyHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -74,26 +74,28 @@ class StudyForumFragment : Fragment() {
 
     private fun applySort(selectedSort: String) = with(binding) {
         toggleSortOptions()
-        val sortedItems = rvForum.getAllItems().sortedByDescending { item ->
+        val sortedItems = rvHistory.getAllItems().sortedByDescending { item ->
             when (selectedSort.lowercase()) {
-                "popularitas" -> item.popularity
-                "like" -> item.like
-                else -> item.comment
+                "matkul" -> item.major
+                else -> item.status
             }
         }
-        rvForum.setInitialItems(sortedItems)
+        rvHistory.setInitialItems(sortedItems)
     }
 
     private fun setupRecyclerView() = with(binding) {
-        rvForum.setMaxPage(5)
-        rvForum.setInitialItems(listOf(ForumItem(0, "User 1", "Initial Title", "Initial Subtitle", 0, 0, 0)))
-        rvForum.setOnItemClickListener { forumItem ->
-            navigateToDetailForum(forumItem)
+        rvHistory.setMaxPage(5)
+        rvHistory.setInitialItems(listOf(HistoryItem(0, "SUCCESS", "Kalkulus", "Prof Hamka", "24-10-2024")))
+        rvHistory.setOnItemClickListener { data ->
+            if (data.status == "SUCCESS") navigateToBookingTutor(data)
         }
     }
 
-    private fun navigateToDetailForum(forumItem: ForumItem) {
-        val args = bundleOf(ARG_FORUM_ITEM to Gson().toJson(forumItem))
-        navController.navigateWithAnimation(R.id.studyForumFragmenttoDetailForumFragment, args = args)
+    private fun navigateToBookingTutor(data: HistoryItem) {
+        val args = bundleOf(
+            BookingTutorFragment.ARG_HISTORY_ITEM to Gson().toJson(data),
+            BookingTutorFragment.ARG_FROM_HISTORY to true
+        )
+        navController.navigateWithAnimation(R.id.bookingTutorFragment, args = args)
     }
 }

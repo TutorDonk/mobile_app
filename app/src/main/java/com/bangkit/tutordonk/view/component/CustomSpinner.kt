@@ -47,6 +47,12 @@ class CustomSpinner @JvmOverloads constructor(
         this.adapter = adapter
     }
 
+    fun setDefaultEntries(data: List<String>) {
+        val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, data)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        this.adapter = adapter
+    }
+
     fun setOnItemSelectedListener(listener: (String) -> Unit) {
         onItemSelected = listener
     }
