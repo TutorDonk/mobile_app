@@ -1,44 +1,33 @@
-package com.bangkit.tutordonk.view.student.study.detail
+package com.bangkit.tutordonk.view.detailforum
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.bangkit.tutordonk.databinding.FragmentDetailForumBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.bangkit.tutordonk.databinding.ActivityDetailForumBinding
 import com.bangkit.tutordonk.databinding.ItemlistCommentForumBinding
+import com.bangkit.tutordonk.databinding.PopupCreateCommentBinding
+import com.bangkit.tutordonk.view.base.BaseCustomDialog
 import com.bangkit.tutordonk.view.base.BaseRecyclerViewAdapter
 import com.bangkit.tutordonk.view.base.GenericDiffCallback
-import com.bangkit.tutordonk.view.component.customrecyclerview.model.ForumItem
-import com.bangkit.tutordonk.view.component.customrecyclerview.model.User
+import com.bangkit.tutordonk.view.component.forumrecyclerview.model.ForumItem
+import com.bangkit.tutordonk.view.component.forumrecyclerview.model.User
 import com.google.gson.Gson
 
-class DetailForumFragment : Fragment() {
-    private var _binding: FragmentDetailForumBinding? = null
-    private val binding get() = _binding!!
-
+class DetailForumActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDetailForumBinding
     private lateinit var adapterComment: BaseRecyclerViewAdapter<User, ItemlistCommentForumBinding>
+    private lateinit var dialog: BaseCustomDialog<PopupCreateCommentBinding>
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDetailForumBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setLayoutListener()
+        binding = ActivityDetailForumBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupUI()
         setupRecyclerView()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun setLayoutListener() = with(binding) {
-        val item = Gson().fromJson(arguments?.getString(ARG_FORUM_ITEM), ForumItem::class.java)
+    private fun setupUI() = with(binding) {
+        val item = Gson().fromJson(intent?.getStringExtra(INTENT_FORUM_ITEM), ForumItem::class.java)
 
         tvCreator.text = item.user
         tvTitle.text = item.title
@@ -50,7 +39,7 @@ class DetailForumFragment : Fragment() {
     private fun setupRecyclerView() {
         with(binding) {
             adapterComment = BaseRecyclerViewAdapter(
-                itemClickListener = {/* no-op */ },
+                itemClickListener = { /* no-op */ },
                 inflateBinding = ItemlistCommentForumBinding::inflate,
                 bind = { binding, item ->
                     with(binding) {
@@ -65,11 +54,25 @@ class DetailForumFragment : Fragment() {
                 )
             )
 
+            tvComments.setOnClickListener { showPopUpDialog() }
             rvComment.adapter = adapterComment
 
             val hardcodeItem = fetchData()
             adapterComment.submitList(hardcodeItem)
         }
+    }
+
+    private fun showPopUpDialog() {
+        dialog = BaseCustomDialog(
+            context = this,
+            bindingInflater = PopupCreateCommentBinding::inflate,
+            bind = { binding ->
+                with(binding) {
+                    ivClose.setOnClickListener { dialog.cancel() }
+                    btnSend.setOnClickListener { dialog.cancel() }
+                }
+            })
+        dialog.show()
     }
 
     private fun fetchData(): List<User> {
@@ -84,6 +87,6 @@ class DetailForumFragment : Fragment() {
 
 
     companion object {
-        const val ARG_FORUM_ITEM = "FORUM_ITEM"
+        const val INTENT_FORUM_ITEM = "FORUM_ITEM"
     }
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="24dp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/TheJakartaSans.Bold.16sp"
+        android:layout_width="0dp"
+        android:drawablePadding="8dp"
+        app:drawableLeftCompat="@drawable/ic_card"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Mr Patrict" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        style="@style/TheJakartaSans.Bold.16sp"
+        android:layout_width="0dp"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        app:drawableLeftCompat="@drawable/ic_phone"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="0895-336-339-299" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        style="@style/TheJakartaSans.Bold.16sp"
+        android:layout_width="0dp"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        app:drawableLeftCompat="@drawable/ic_location"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_phone"
+        tools:text="Asal aja" />
+
+    <TextView
+        android:id="@+id/tv_rate"
+        style="@style/TheJakartaSans.Bold.16sp"
+        android:layout_width="0dp"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        app:drawableLeftCompat="@drawable/ic_rate"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_address"
+        tools:text="Rp 15.000" />
+
+    <TextView
+        android:id="@+id/tv_certificate"
+        style="@style/TheJakartaSans.Bold.20sp"
+        android:layout_width="0dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/title_certificate"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_rate" />
+
+    <TextView
+        android:id="@+id/tv_certificate_url"
+        style="@style/TheJakartaSans.Bold.16sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_hire"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_certificate"
+        tools:text="1. https://drive.google.com/file/d/1x_8T4AQmAP6_j5lf2vJ8B9l76DLr_dSR/view\n2. https://drive.google.com/file/d/1x_8T4AQmAP6_j5lf2vJ8B9l76DLr_dSR/view\n3. https://drive.google.com/file/d/1x_8T4AQmAP6_j5lf2vJ8B9l76DLr_dSR/view" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_hire"
+        style="@style/CustomButton"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="24dp"
+        android:text="@string/btn_book"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_certificate_url" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,12 @@
         tools:layout="@layout/fragment_teacher_history_study" />
 
     <fragment
+        android:id="@+id/studyForumFragment"
+        android:name="com.bangkit.tutordonk.view.teacher.forum.StudyForumFragment"
+        android:label="StudyForumFragment"
+        tools:layout="@layout/fragment_study_forum" />
+
+    <fragment
         android:id="@+id/teacherEditProfileFragment"
         android:name="com.bangkit.tutordonk.view.teacher.editprofile.TeacherEditProfileFragment"
         android:label="Teacher Edit Profile Fragment"

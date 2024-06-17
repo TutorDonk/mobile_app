@@ -1,23 +1,21 @@
 package com.bangkit.tutordonk.view.student.study.forum
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bangkit.tutordonk.R
-import com.bangkit.tutordonk.databinding.FragmentStudentStudyForumBinding
+import com.bangkit.tutordonk.databinding.FragmentStudyForumBinding
 import com.bangkit.tutordonk.view.component.forumrecyclerview.model.ForumItem
-import com.bangkit.tutordonk.view.navigateWithAnimation
-import com.bangkit.tutordonk.view.student.study.forum.detail.DetailForumFragment.Companion.ARG_FORUM_ITEM
+import com.bangkit.tutordonk.view.detailforum.DetailForumActivity
 import com.google.gson.Gson
 
 class StudyForumFragment : Fragment() {
 
-    private var _binding: FragmentStudentStudyForumBinding? = null
+    private var _binding: FragmentStudyForumBinding? = null
     private val binding get() = _binding!!
     private var isSortClicked = false
     private var spinnerInteracted = false
@@ -27,7 +25,7 @@ class StudyForumFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStudentStudyForumBinding.inflate(inflater, container, false)
+        _binding = FragmentStudyForumBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -88,12 +86,9 @@ class StudyForumFragment : Fragment() {
         rvForum.setMaxPage(5)
         rvForum.setInitialItems(listOf(ForumItem(0, "User 1", "Initial Title", "Initial Subtitle", 0, 0, 0)))
         rvForum.setOnItemClickListener { forumItem ->
-            navigateToDetailForum(forumItem)
+            startActivity(Intent(requireContext(), DetailForumActivity::class.java).also {
+                it.putExtra(DetailForumActivity.INTENT_FORUM_ITEM, Gson().toJson(forumItem))
+            })
         }
-    }
-
-    private fun navigateToDetailForum(forumItem: ForumItem) {
-        val args = bundleOf(ARG_FORUM_ITEM to Gson().toJson(forumItem))
-        navController.navigateWithAnimation(R.id.studyForumFragmenttoDetailForumFragment, args = args)
     }
 }

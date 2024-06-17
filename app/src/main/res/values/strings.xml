@@ -60,6 +60,15 @@
     <string name="teacher_user_title_tutor_management">Tutor management</string>
     <string name="tutor_management_btn_reject">Reject</string>
     <string name="tutor_management_btn_accept">Accept</string>
+    <string name="hint_date">MM/DD/YY</string>
+    <string name="hint_certificate">Nama Sertifikat</string>
+    <string name="hint_certificate_link">Link Sertifikat</string>
+    <string name="btn_add">Tambah</string>
+    <string name="title_name">Name</string>
+    <string name="title_price">Price</string>
+    <string name="title_certificate">Certificate</string>
+    <string name="btn_book">Book Now</string>
+    <string name="title_forum">Forum</string>
 
     <string-array name="list_study_array">
         <item>Kalkulus</item>

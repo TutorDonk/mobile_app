@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:backgroundTint="@color/bg_brown"
@@ -23,53 +22,59 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_name"
-            style="@style/TheJakartaSans.SemiBold.18sp.white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_close"
-            tools:text="Nama Tutor" />
-
-        <com.bangkit.tutordonk.view.component.CustomSpinner
-            android:id="@+id/spinner_violation"
-            style="@style/BaseSpinnerStyle"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:entries="@array/list_violation_array"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_name" />
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_reason"
+            android:id="@+id/til_name"
             style="@style/CustomTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
             android:layout_marginTop="16dp"
             app:boxBackgroundColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/spinner_violation">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_close">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_reason"
+                android:id="@+id/tiet_name"
                 style="@style/CustomEditText"
                 android:layout_height="match_parent"
                 android:gravity="start"
-                android:hint="@string/popup_hint_desc"
+                android:hint="@string/hint_certificate"
                 android:imeOptions="actionNext"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:textAlignment="gravity" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_achievements"
+            style="@style/CustomTextInputLayout"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_certificate"
+                style="@style/CustomEditText"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_certificate_link"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textAlignment="gravity" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_send"
+            android:id="@+id/btn_add"
             style="@style/CustomButton"
             android:layout_width="wrap_content"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/green_light"
-            android:text="@string/popup_btn_send"
+            android:text="@string/btn_add"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/til_reason" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_achievements" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

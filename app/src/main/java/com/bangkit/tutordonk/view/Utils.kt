@@ -3,7 +3,7 @@ package com.bangkit.tutordonk.view
 import android.content.Context
 import android.os.Bundle
 import android.util.TypedValue
-import android.widget.Spinner
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
 import com.bangkit.tutordonk.R
@@ -38,7 +38,7 @@ fun Context.dpToPx(dp: Int): Int {
     ).toInt()
 }
 
-fun Spinner.setReadOnly() {
+fun View.setReadOnly() {
     this.isEnabled = false
     this.isClickable = false
     this.isFocusable = false

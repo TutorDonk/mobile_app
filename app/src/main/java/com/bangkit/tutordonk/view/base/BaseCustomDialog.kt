@@ -13,6 +13,8 @@ class BaseCustomDialog<VB : ViewBinding>(
     context: Context,
     private val bindingInflater: (LayoutInflater) -> VB,
     private val bind: (VB) -> Unit,
+    val onAddButtonClick: ((String) -> Unit)? = null,
+    val onDismiss: ((binding: VB) -> Unit)? = null
 ) : AppCompatDialog(context) {
 
     private lateinit var binding: VB
@@ -27,5 +29,9 @@ class BaseCustomDialog<VB : ViewBinding>(
         setContentView(binding.root)
 
         window?.setLayout(context.dpToPx(350), ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        setOnDismissListener {
+            onDismiss?.invoke(binding)
+        }
     }
 }

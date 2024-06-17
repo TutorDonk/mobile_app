@@ -57,6 +57,27 @@
         app:layout_constraintStart_toStartOf="@id/gl_start"
         app:layout_constraintTop_toBottomOf="@id/spinner_sub_study" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/hint_date"
+        app:endIconDrawable="@drawable/ic_calendar"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="@id/gl_end"
+        app:layout_constraintStart_toStartOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/spinner_select_tutor">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="8"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_booking"
         style="@style/CustomButton"
@@ -65,7 +86,7 @@
         android:text="@string/booking_tutor_btn_booking_now"
         app:layout_constraintEnd_toEndOf="@id/gl_end"
         app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/spinner_select_tutor" />
+        app:layout_constraintTop_toBottomOf="@id/til_date" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_rating"

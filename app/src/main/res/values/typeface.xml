@@ -47,6 +47,10 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TheJakartaSans.Bold.20sp">
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="TheJakartaSans.Bold.22sp">
         <item name="android:textSize">22sp</item>
     </style>
