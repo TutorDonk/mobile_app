@@ -18,7 +18,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="24dp" />
 
-    <com.bangkit.tutordonk.view.component.CustomSpinner
+    <com.bangkit.tutordonk.component.CustomSpinner
         android:id="@+id/spinner_study"
         style="@style/BaseSpinnerStyle"
         android:backgroundTint="@color/brown_light"
@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="@+id/gl_start"
         app:layout_constraintTop_toBottomOf="@id/spinner_study" />
 
-    <com.bangkit.tutordonk.view.component.CustomSpinner
+    <com.bangkit.tutordonk.component.CustomSpinner
         android:id="@+id/spinner_sub_study"
         style="@style/BaseSpinnerStyle"
         android:layout_marginTop="8dp"
@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="@id/gl_start"
         app:layout_constraintTop_toBottomOf="@id/mcb_select_sub_study" />
 
-    <com.bangkit.tutordonk.view.component.CustomSpinner
+    <com.bangkit.tutordonk.component.CustomSpinner
         android:id="@+id/spinner_select_tutor"
         style="@style/BaseSpinnerStyle"
         android:layout_marginTop="8dp"

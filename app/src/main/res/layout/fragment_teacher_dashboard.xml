@@ -76,7 +76,7 @@
             android:text="@string/title_forum" />
     </androidx.cardview.widget.CardView>
 
-    <com.bangkit.tutordonk.view.component.forumrecyclerview.ForumRecyclerView
+    <com.bangkit.tutordonk.component.forumrecyclerview.ForumRecyclerView
         android:id="@+id/rv_forum_hottest"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -10,9 +10,9 @@ import androidx.navigation.Navigation
 import com.bangkit.tutordonk.R
 import com.bangkit.tutordonk.databinding.FragmentTeacherTutorManagementBinding
 import com.bangkit.tutordonk.databinding.ItemlistTutorManagementBinding
-import com.bangkit.tutordonk.view.base.BaseRecyclerViewAdapter
-import com.bangkit.tutordonk.view.base.GenericDiffCallback
-import com.bangkit.tutordonk.view.navigateWithAnimation
+import com.bangkit.tutordonk.component.base.BaseRecyclerViewAdapter
+import com.bangkit.tutordonk.component.base.GenericDiffCallback
+import com.bangkit.tutordonk.utils.navigateWithAnimation
 import com.bangkit.tutordonk.view.teacher.tutormanagement.model.TutorManagementItem
 
 class TeacherTutorManagementFragment : Fragment() {

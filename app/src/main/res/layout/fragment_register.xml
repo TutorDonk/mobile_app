@@ -41,12 +41,12 @@
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.bangkit.tutordonk.view.component.CustomSpinner
+            <com.bangkit.tutordonk.component.CustomSpinner
                 android:id="@+id/spinner_role"
                 style="@style/BaseSpinnerStyle"
                 android:layout_marginTop="60dp"
-                android:layout_marginBottom="16dp"
                 android:entries="@array/roles_array"
+                android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -54,7 +54,7 @@
             <TextView
                 android:id="@+id/tv_title_name"
                 style="@style/TheJakartaSans.Bold.13sp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/title_name"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintTop_toBottomOf="@id/spinner_role" />
@@ -73,12 +73,55 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/tv_title_email"
+                style="@style/TheJakartaSans.Bold.13sp"
+                android:layout_marginTop="8dp"
+                android:text="@string/title_email"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/til_name" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_email"
+                style="@style/CustomTextInputLayout"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_email"
+                    style="@style/CustomEditText"
+                    android:hint="@string/login_hint_email" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_title_password"
+                style="@style/TheJakartaSans.Bold.13sp"
+                android:layout_marginTop="8dp"
+                android:text="@string/login_title_password"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/til_email" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password"
+                style="@style/CustomTextInputLayout"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_password"
+                    style="@style/CustomEditText"
+                    android:hint="@string/login_title_password"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
                 android:id="@+id/tv_title_price"
                 style="@style/TheJakartaSans.Bold.13sp"
                 android:layout_marginTop="8dp"
                 android:text="@string/title_price"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
-                app:layout_constraintTop_toBottomOf="@id/til_name" />
+                app:layout_constraintTop_toBottomOf="@id/til_password" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_price"
@@ -91,8 +134,8 @@
                     android:id="@+id/tiet_price"
                     style="@style/CustomEditText"
                     android:hint="@string/title_price"
-                    android:maxLength="13"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:maxLength="13" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -245,7 +288,7 @@
                     android:inputType="textMultiLine" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.bangkit.tutordonk.view.component.CustomChipGroup
+            <com.bangkit.tutordonk.component.CustomChipGroup
                 android:id="@+id/custom_chip"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

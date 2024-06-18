@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.base
+package com.bangkit.tutordonk.component.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

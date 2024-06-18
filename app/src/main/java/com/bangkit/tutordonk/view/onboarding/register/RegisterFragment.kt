@@ -1,6 +1,5 @@
 package com.bangkit.tutordonk.view.onboarding.register
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,12 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.bangkit.tutordonk.R
+import com.bangkit.tutordonk.component.base.BaseCustomDialog
 import com.bangkit.tutordonk.databinding.FragmentRegisterBinding
 import com.bangkit.tutordonk.databinding.PopupAddCertificateBinding
-import com.bangkit.tutordonk.view.base.BaseCustomDialog
-import com.bangkit.tutordonk.view.setReadOnly
-import com.bangkit.tutordonk.view.student.StudentHomeActivity
-import com.bangkit.tutordonk.view.teacher.TeacherActivity
+import com.bangkit.tutordonk.model.UserResponse
+import com.bangkit.tutordonk.network.ApiServiceProvider
+import com.bangkit.tutordonk.utils.isTextMatchingKeywords
+import com.bangkit.tutordonk.utils.navigateWithAnimation
+import com.bangkit.tutordonk.utils.setReadOnly
+import org.koin.android.ext.android.inject
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -22,10 +27,12 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var navController: NavController
     private lateinit var dialogCertificate: BaseCustomDialog<PopupAddCertificateBinding>
 
     private var isSiswa = false
     private val listOfCertificate: MutableList<String> = mutableListOf()
+    private val apiServiceProvider: ApiServiceProvider by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +44,14 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         setLayoutListener()
         setDialogAddCertificate()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setDialogAddCertificate() {
@@ -86,11 +99,6 @@ class RegisterFragment : Fragment() {
         )
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun setLayoutListener() = with(binding) {
         spinnerRole.setOnItemSelectedListener {
             isSiswa = it.lowercase() == "siswa"
@@ -98,13 +106,6 @@ class RegisterFragment : Fragment() {
             groupTeacher.visibility = if (isSiswa.not()) View.VISIBLE else View.GONE
 
             if (isSiswa.not()) {
-                customChip.setChips(
-                    listOf(
-                        "Kalkulus",
-                        "Algoritm",
-                        "B Inggris",
-                    )
-                )
                 customChip.setOnChipSelectedListener { data ->
                     tietSubjects.setReadOnly()
                     tietSubjects.setText(data.joinToString(separator = ",\n"))
@@ -119,16 +120,7 @@ class RegisterFragment : Fragment() {
 
         tietPrice.addTextChangedListener(moneyTextWatcher())
 
-        btnRegister.setOnClickListener {
-            startActivity(
-                Intent(
-                    requireContext(),
-                    if (isSiswa) StudentHomeActivity::class.java else TeacherActivity::class.java
-                ).apply {
-                    this.putExtra(StudentHomeActivity.NAME, tietName.text.toString())
-                    setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                })
-        }
+        btnRegister.setOnClickListener { doRegister() }
     }
 
     private fun moneyTextWatcher(): TextWatcher {
@@ -175,8 +167,22 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun String.isTextMatchingKeywords(keywords: String = "https://drive.google.com"): Boolean {
-        val keywordList = this.split(",").map { it.trim() }
-        return keywordList.all { keyword -> keyword.contains(keywords, ignoreCase = true) }
+    private fun doRegister() {
+        with(binding) {
+            val reqBody = mapOf(
+                "nama" to tietName.text.toString(),
+                "email" to tietEmail.text.toString(),
+                "password" to tietPassword.text.toString(),
+                "role" to isSiswa.roleString()
+            )
+
+            val callback = apiServiceProvider.createCallback<UserResponse> { _ ->
+                navController.navigateWithAnimation(R.id.loginFragment, true)
+            }
+
+            apiServiceProvider.apiService.authRegister(reqBody).enqueue(callback)
+        }
     }
 }
+
+private fun Boolean.roleString() = if (this) "siswa" else "pengajar"

@@ -5,26 +5,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bangkit.tutordonk.R
 import com.bangkit.tutordonk.databinding.FragmentLoginBinding
-import com.bangkit.tutordonk.view.navigateWithAnimation
-import com.bangkit.tutordonk.view.student.StudentHomeActivity
+import com.bangkit.tutordonk.model.UserResponse
+import com.bangkit.tutordonk.network.ApiServiceProvider
+import com.bangkit.tutordonk.utils.SharedPreferencesHelper
+import com.bangkit.tutordonk.utils.navigateWithAnimation
+import com.bangkit.tutordonk.view.teacher.TeacherActivity
+import org.koin.android.ext.android.inject
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private var name = ""
-
     private lateinit var navController: NavController
 
+    private val sharedPreferences: SharedPreferencesHelper by inject()
+    private val apiServiceProvider: ApiServiceProvider by inject()
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
@@ -42,15 +45,25 @@ class LoginFragment : Fragment() {
     }
 
     private fun setLayoutListener() = with(binding) {
-        tietEmail.doOnTextChanged { text, _, _, _ ->
-            name = text.toString().substringBefore("@")
-        }
-        btnLogin.setOnClickListener {
-            startActivity(Intent(requireContext(), StudentHomeActivity::class.java).apply {
-                this.putExtra(StudentHomeActivity.NAME, name)
-                setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            })
-        }
+        btnLogin.setOnClickListener { doLogin() }
         btnRegister.setOnClickListener { navController.navigateWithAnimation(R.id.loginFragmentToRegisterFragment) }
+    }
+
+    private fun doLogin() {
+        with(binding) {
+            val callback = apiServiceProvider.createCallback<UserResponse> { userResponse ->
+                sharedPreferences.saveToken(userResponse.token)
+                startActivity(Intent(requireContext(), TeacherActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                })
+            }
+
+            apiServiceProvider.apiService.authLogin(
+                mapOf(
+                    "email" to tietEmail.text.toString(),
+                    "password" to tietPassword.text.toString()
+                )
+            ).enqueue(callback)
+        }
     }
 }

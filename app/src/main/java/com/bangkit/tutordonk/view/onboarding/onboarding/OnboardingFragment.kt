@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.bangkit.tutordonk.R
 import com.bangkit.tutordonk.databinding.FragmentOnboardingBinding
-import com.bangkit.tutordonk.view.navigateWithAnimation
+import com.bangkit.tutordonk.utils.navigateWithAnimation
 
 class OnboardingFragment : Fragment() {
     private var _binding: FragmentOnboardingBinding? = null

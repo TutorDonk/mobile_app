@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.component
+package com.bangkit.tutordonk.component
 
 import android.content.Context
 import android.util.AttributeSet
@@ -12,8 +12,9 @@ class CustomSpinner @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatSpinner(context, attrs, defStyleAttr) {
 
-
     private var onItemSelected: ((String) -> Unit)? = null
+
+    var value: String = ""
 
     init {
         context.theme.obtainStyledAttributes(
@@ -31,7 +32,9 @@ class CustomSpinner @JvmOverloads constructor(
 
         onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                onItemSelected?.invoke(parent.getItemAtPosition(position) as String)
+                val getItem = parent.getItemAtPosition(position) as String
+                value = getItem
+                onItemSelected?.invoke(getItem)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

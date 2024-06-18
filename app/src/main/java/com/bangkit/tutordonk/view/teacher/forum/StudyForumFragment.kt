@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.bangkit.tutordonk.component.forumrecyclerview.model.ForumItem
 import com.bangkit.tutordonk.databinding.FragmentStudyForumBinding
-import com.bangkit.tutordonk.view.component.forumrecyclerview.model.ForumItem
 import com.bangkit.tutordonk.view.detailforum.DetailForumActivity
 import com.google.gson.Gson
 

@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_sort" />
 
-    <com.bangkit.tutordonk.view.component.CustomSpinner
+    <com.bangkit.tutordonk.component.CustomSpinner
         android:id="@+id/spinner_sort"
         style="@style/BaseSpinnerStyle"
         android:layout_marginTop="8dp"
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_sort" />
 
-    <com.bangkit.tutordonk.view.component.historyrecyclerview.HistoryRecyclerView
+    <com.bangkit.tutordonk.component.historyrecyclerview.HistoryRecyclerView
         android:id="@+id/rv_history"
         android:layout_width="0dp"
         android:layout_height="0dp"

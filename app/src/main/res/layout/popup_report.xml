@@ -31,7 +31,7 @@
             app:layout_constraintTop_toBottomOf="@id/iv_close"
             tools:text="Nama Tutor" />
 
-        <com.bangkit.tutordonk.view.component.CustomSpinner
+        <com.bangkit.tutordonk.component.CustomSpinner
             android:id="@+id/spinner_violation"
             style="@style/BaseSpinnerStyle"
             android:layout_marginTop="16dp"

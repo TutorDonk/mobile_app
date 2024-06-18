@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bangkit.tutordonk.R
+import com.bangkit.tutordonk.component.historyrecyclerview.model.HistoryItem
 import com.bangkit.tutordonk.databinding.FragmentStudentStudyHistoryBinding
-import com.bangkit.tutordonk.view.component.historyrecyclerview.model.HistoryItem
-import com.bangkit.tutordonk.view.navigateWithAnimation
+import com.bangkit.tutordonk.utils.navigateWithAnimation
 import com.bangkit.tutordonk.view.student.booking.BookingTutorFragment
 import com.google.gson.Gson
 

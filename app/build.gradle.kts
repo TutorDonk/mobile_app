@@ -39,6 +39,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.kotlin.reflect)
+    implementation(libs.koin.android)
     implementation(libs.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -46,6 +48,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.library)
+    implementation(libs.logging.interceptor)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

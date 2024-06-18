@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bangkit.tutordonk.databinding.FragmentTeacherHistoryStudyBinding
-import com.bangkit.tutordonk.view.component.historyrecyclerview.model.HistoryItem
+import com.bangkit.tutordonk.component.historyrecyclerview.model.HistoryItem
 
 class TeacherHistoryStudyFragment : Fragment() {
     private var _binding: FragmentTeacherHistoryStudyBinding? = null

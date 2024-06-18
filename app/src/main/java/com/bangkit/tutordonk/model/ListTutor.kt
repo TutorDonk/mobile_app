@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.model
+package com.bangkit.tutordonk.model
 
 data class ListTutor(
     val data: List<Tutor> = emptyList()

@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.component.historyrecyclerview.model
+package com.bangkit.tutordonk.component.historyrecyclerview.model
 
 data class HistoryItem(
     val id: Int = 0,

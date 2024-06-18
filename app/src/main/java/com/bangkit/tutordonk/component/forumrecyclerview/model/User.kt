@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.component.forumrecyclerview.model
+package com.bangkit.tutordonk.component.forumrecyclerview.model
 
 data class User(
     val name: String = "",

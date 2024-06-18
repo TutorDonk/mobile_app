@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bangkit.tutordonk.databinding.ItemlistBrowseTeacherBinding
-import com.bangkit.tutordonk.view.model.ListTutor
+import com.bangkit.tutordonk.model.ListTutor
 import com.google.gson.Gson
 import java.text.NumberFormat
 import java.util.Locale

@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.component.historyrecyclerview
+package com.bangkit.tutordonk.component.historyrecyclerview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,9 +7,9 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.tutordonk.databinding.CustomRecyclerviewBinding
 import com.bangkit.tutordonk.databinding.ItemlistHistoryBinding
-import com.bangkit.tutordonk.view.base.BaseRecyclerViewAdapter
-import com.bangkit.tutordonk.view.base.GenericDiffCallback
-import com.bangkit.tutordonk.view.component.historyrecyclerview.model.HistoryItem
+import com.bangkit.tutordonk.component.base.BaseRecyclerViewAdapter
+import com.bangkit.tutordonk.component.base.GenericDiffCallback
+import com.bangkit.tutordonk.component.historyrecyclerview.model.HistoryItem
 
 typealias OnItemClickListener = (HistoryItem) -> Unit
 

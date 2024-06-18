@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.bangkit.tutordonk.view.model.ListTutor
+import com.bangkit.tutordonk.model.ListTutor
 import com.bangkit.tutordonk.view.student.booking.BrowseTutorFragment
 import com.bangkit.tutordonk.view.student.booking.BrowseTutorFragment.Companion.ARG_TUTOR_DATA
 import com.google.gson.Gson

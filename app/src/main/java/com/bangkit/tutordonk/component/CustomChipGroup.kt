@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.component
+package com.bangkit.tutordonk.component
 
 import android.content.Context
 import android.util.AttributeSet
@@ -16,6 +16,7 @@ class CustomChipGroup @JvmOverloads constructor(
 
     private var binding: CustomChipGroupBinding
     private var onChipSelectedListener: ((List<String>) -> Unit)? = null
+    var value: MutableList<String> = mutableListOf()
 
     init {
         orientation = VERTICAL
@@ -30,6 +31,7 @@ class CustomChipGroup @JvmOverloads constructor(
         binding.chipGroup.removeAllViews()
         labels.forEachIndexed { index, label ->
             addChip(label, index in checkedIndices)
+            value.add(0, label)
         }
     }
 

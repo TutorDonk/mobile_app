@@ -2,20 +2,24 @@ package com.bangkit.tutordonk.view.detailforum
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bangkit.tutordonk.R
+import com.bangkit.tutordonk.component.base.BaseCustomDialog
+import com.bangkit.tutordonk.component.base.BaseRecyclerViewAdapter
+import com.bangkit.tutordonk.component.base.GenericDiffCallback
+import com.bangkit.tutordonk.component.forumrecyclerview.model.ForumItem
+import com.bangkit.tutordonk.component.forumrecyclerview.model.User
 import com.bangkit.tutordonk.databinding.ActivityDetailForumBinding
 import com.bangkit.tutordonk.databinding.ItemlistCommentForumBinding
 import com.bangkit.tutordonk.databinding.PopupCreateCommentBinding
-import com.bangkit.tutordonk.view.base.BaseCustomDialog
-import com.bangkit.tutordonk.view.base.BaseRecyclerViewAdapter
-import com.bangkit.tutordonk.view.base.GenericDiffCallback
-import com.bangkit.tutordonk.view.component.forumrecyclerview.model.ForumItem
-import com.bangkit.tutordonk.view.component.forumrecyclerview.model.User
+import com.bangkit.tutordonk.utils.SharedPreferencesHelper
 import com.google.gson.Gson
+import org.koin.android.ext.android.inject
 
 class DetailForumActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailForumBinding
     private lateinit var adapterComment: BaseRecyclerViewAdapter<User, ItemlistCommentForumBinding>
     private lateinit var dialog: BaseCustomDialog<PopupCreateCommentBinding>
+    private val sharedPreferences: SharedPreferencesHelper by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,7 @@ class DetailForumActivity : AppCompatActivity() {
     private fun setupUI() = with(binding) {
         val item = Gson().fromJson(intent?.getStringExtra(INTENT_FORUM_ITEM), ForumItem::class.java)
 
+        tvGreeting.text = getString(R.string.dashboard_greeting, sharedPreferences.getName())
         tvCreator.text = item.user
         tvTitle.text = item.title
         tvDesc.text = item.subtitle

@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.base
+package com.bangkit.tutordonk.component.base
 
 import android.content.Context
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.appcompat.app.AppCompatDialog
 import androidx.viewbinding.ViewBinding
-import com.bangkit.tutordonk.view.dpToPx
+import com.bangkit.tutordonk.utils.dpToPx
 
 class BaseCustomDialog<VB : ViewBinding>(
     context: Context,

@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bangkit.tutordonk.R
 import com.bangkit.tutordonk.databinding.FragmentOnboardingMainBinding
-import com.bangkit.tutordonk.view.navigateWithAnimation
+import com.bangkit.tutordonk.utils.navigateWithAnimation
 
 class OnboardingMainFragment : Fragment() {
     private var _binding: FragmentOnboardingMainBinding? = null

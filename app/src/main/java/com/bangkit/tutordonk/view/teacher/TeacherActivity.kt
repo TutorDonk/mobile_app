@@ -1,18 +1,21 @@
 package com.bangkit.tutordonk.view.teacher
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.bangkit.tutordonk.R
 import com.bangkit.tutordonk.databinding.ActivityTeacherBinding
-import com.bangkit.tutordonk.view.navigateWithAnimation
-import com.bangkit.tutordonk.view.student.StudentHomeActivity
+import com.bangkit.tutordonk.model.ShareViewModel
+import com.bangkit.tutordonk.utils.navigateWithAnimation
 
 class TeacherActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTeacherBinding
 
     private lateinit var navController: NavController
+
+    val data: ShareViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,7 +31,10 @@ class TeacherActivity : AppCompatActivity() {
 
     private fun setupUI() {
         with(binding) {
-            tvGreeting.text = getString(R.string.dashboard_greeting, intent.getStringExtra(StudentHomeActivity.NAME))
+            data.name.observe(this@TeacherActivity) {
+                tvGreeting.text = getString(R.string.dashboard_greeting, it)
+            }
+
             tvGreeting.setOnClickListener {
                 if (navController.currentDestination?.id != R.id.teacherEditProfileFragment) {
                     navController.navigateWithAnimation(R.id.teacherEditProfileFragment)

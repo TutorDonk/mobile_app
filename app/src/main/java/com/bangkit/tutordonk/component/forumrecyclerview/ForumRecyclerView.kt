@@ -1,4 +1,4 @@
-package com.bangkit.tutordonk.view.component.forumrecyclerview
+package com.bangkit.tutordonk.component.forumrecyclerview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,9 +7,9 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.tutordonk.databinding.CustomRecyclerviewBinding
 import com.bangkit.tutordonk.databinding.ItemlistForumBinding
-import com.bangkit.tutordonk.view.base.BaseRecyclerViewAdapter
-import com.bangkit.tutordonk.view.base.GenericDiffCallback
-import com.bangkit.tutordonk.view.component.forumrecyclerview.model.ForumItem
+import com.bangkit.tutordonk.component.base.BaseRecyclerViewAdapter
+import com.bangkit.tutordonk.component.base.GenericDiffCallback
+import com.bangkit.tutordonk.component.forumrecyclerview.model.ForumItem
 
 typealias OnItemClickListener = (ForumItem) -> Unit
 
