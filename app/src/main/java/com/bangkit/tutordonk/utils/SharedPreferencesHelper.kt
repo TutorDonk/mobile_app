@@ -7,13 +7,12 @@ class SharedPreferencesHelper(context: Context) {
     private val sharedPreferences =
         context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 
-    fun saveToken(token: String) {
+    fun saveRole(role: String) {
         sharedPreferences.edit().apply {
-            putString(KEY_TOKEN, token)
+            putString(KEY_ROLE, role)
             commit()
         }
     }
-
 
     fun saveUsername(username: String) {
         sharedPreferences.edit().apply {
@@ -26,10 +25,13 @@ class SharedPreferencesHelper(context: Context) {
 
     fun getName(): String = sharedPreferences.getString(KEY_NAME, null) ?: ""
 
+    fun getRole(): String = sharedPreferences.getString(KEY_ROLE, null) ?: ""
+
     fun clearData() = sharedPreferences.edit().clear().apply()
 
     companion object {
         private const val KEY_TOKEN = "token"
         private const val KEY_NAME = "name"
+        private const val KEY_ROLE = "role"
     }
 }

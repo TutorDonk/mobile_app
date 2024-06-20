@@ -4,14 +4,14 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import androidx.recyclerview.widget.RecyclerView
-import com.bangkit.tutordonk.databinding.CustomRecyclerviewBinding
-import com.bangkit.tutordonk.databinding.ItemlistHistoryBinding
 import com.bangkit.tutordonk.component.base.BaseRecyclerViewAdapter
 import com.bangkit.tutordonk.component.base.GenericDiffCallback
-import com.bangkit.tutordonk.component.historyrecyclerview.model.HistoryItem
+import com.bangkit.tutordonk.databinding.CustomRecyclerviewBinding
+import com.bangkit.tutordonk.databinding.ItemlistHistoryBinding
+import com.bangkit.tutordonk.model.ListBookingItem
+import com.bangkit.tutordonk.utils.toFormattedDateString
 
-typealias OnItemClickListener = (HistoryItem) -> Unit
+typealias OnItemClickListener = (ListBookingItem) -> Unit
 
 class HistoryRecyclerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -19,19 +19,13 @@ class HistoryRecyclerView @JvmOverloads constructor(
 
     private val binding: CustomRecyclerviewBinding =
         CustomRecyclerviewBinding.inflate(LayoutInflater.from(context), this, true)
-    private lateinit var historyAdapter: BaseRecyclerViewAdapter<HistoryItem, ItemlistHistoryBinding>
+    private lateinit var historyAdapter: BaseRecyclerViewAdapter<ListBookingItem, ItemlistHistoryBinding>
 
-    private var isLoading = false
-    private var currentPage = 0
-    private var maxPage = 5
-    private var itemsPerPage = 10
-    private val allItems = mutableListOf<HistoryItem>()
-
+    private val allItems = mutableListOf<ListBookingItem>()
     private var onItemClickListener: OnItemClickListener = {}
 
     init {
         setupRecyclerView()
-        setupPagination()
     }
 
     private fun setupRecyclerView() {
@@ -42,10 +36,10 @@ class HistoryRecyclerView @JvmOverloads constructor(
             inflateBinding = ItemlistHistoryBinding::inflate,
             bind = { binding, item ->
                 with(binding) {
-                    tvStatus.text = item.status
-                    tvTitle.text = item.major
-                    tvSubtitle.text = item.name
-                    tvTime.text = item.date
+                    tvStatus.text = if (item.status == 0) "SUCCESS" else "FAILED"
+                    tvTitle.text = item.course
+                    tvSubtitle.text = item.namaTutor
+                    tvTime.text = item.createdAt._seconds.toFormattedDateString("dd/mm/yyyy HH:mm:ss")
                 }
             },
             diffCallback = GenericDiffCallback(
@@ -56,35 +50,7 @@ class HistoryRecyclerView @JvmOverloads constructor(
         binding.rvMain.adapter = historyAdapter
     }
 
-    private fun setupPagination() {
-        binding.rvMain.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView.canScrollVertically(1).not() && isLoading.not() && currentPage < maxPage) {
-                    loadMoreItems()
-                }
-            }
-        })
-    }
-
-    private fun loadMoreItems() {
-        isLoading = true
-        currentPage++
-        val newItems = fetchData(currentPage)
-        allItems.addAll(newItems)
-        historyAdapter.submitList(allItems.toList())
-        isLoading = false
-    }
-
-    fun setMaxPage(maxPage: Int) {
-        this.maxPage = maxPage
-    }
-
-    fun setItemsPerPage(itemsPerPage: Int) {
-        this.itemsPerPage = itemsPerPage
-    }
-
-    fun setInitialItems(items: List<HistoryItem>) {
+    fun setInitialItems(items: List<ListBookingItem>) {
         allItems.clear()
         allItems.addAll(items)
         historyAdapter.submitList(allItems.toList())
@@ -95,19 +61,6 @@ class HistoryRecyclerView @JvmOverloads constructor(
         historyAdapter.setOnItemClickListener(callback)
     }
 
-    fun getAllItems() = historyAdapter.currentList.toMutableList()
-
-    private fun fetchData(page: Int): List<HistoryItem> {
-        return List(itemsPerPage) {
-            HistoryItem(
-                id = (page - 1) * itemsPerPage + it,
-                status = "SUCCESS",
-                name = "Prof. Hamka",
-                major = "Kalkulus",
-                subMajor = "Sub Kalkulus",
-                date = "$it-04-2024",
-            )
-        }
-    }
+    fun getAllItems() = historyAdapter.currentList.toList()
 
 }

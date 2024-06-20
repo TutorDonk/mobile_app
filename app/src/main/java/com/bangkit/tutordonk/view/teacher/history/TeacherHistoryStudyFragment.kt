@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bangkit.tutordonk.databinding.FragmentTeacherHistoryStudyBinding
-import com.bangkit.tutordonk.component.historyrecyclerview.model.HistoryItem
+import com.bangkit.tutordonk.model.ListBookingItem
+import com.bangkit.tutordonk.network.ApiServiceProvider
+import org.koin.android.ext.android.inject
 
 class TeacherHistoryStudyFragment : Fragment() {
     private var _binding: FragmentTeacherHistoryStudyBinding? = null
     private val binding get() = _binding!!
+
+    private val apiServiceProvider: ApiServiceProvider by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,20 +24,21 @@ class TeacherHistoryStudyFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupUI()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    private fun setupUI() {
-        with(binding) {
-            rvHistory.setMaxPage(5)
-            rvHistory.setInitialItems(listOf(HistoryItem(0, "SUCCESS", "Kalkulus", "Prof Hamka", "24-10-2024")))
-        }
+    override fun onResume() {
+        super.onResume()
+        val callback = apiServiceProvider.createCallback<List<ListBookingItem>>(
+            onSuccess = {
+                with(binding) {
+                    rvHistory.setInitialItems(it)
+                }
+            }
+        )
+
+        apiServiceProvider.apiService.bookingHistory().enqueue(callback)
     }
 }

@@ -5,13 +5,13 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.bangkit.tutordonk.databinding.CustomRecyclerviewBinding
-import com.bangkit.tutordonk.databinding.ItemlistForumBinding
 import com.bangkit.tutordonk.component.base.BaseRecyclerViewAdapter
 import com.bangkit.tutordonk.component.base.GenericDiffCallback
-import com.bangkit.tutordonk.component.forumrecyclerview.model.ForumItem
+import com.bangkit.tutordonk.databinding.CustomRecyclerviewBinding
+import com.bangkit.tutordonk.databinding.ItemlistForumBinding
+import com.bangkit.tutordonk.model.ListForumItem
 
-typealias OnItemClickListener = (ForumItem) -> Unit
+typealias OnItemClickListener = (ListForumItem) -> Unit
 
 class ForumRecyclerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -19,13 +19,13 @@ class ForumRecyclerView @JvmOverloads constructor(
 
     private val binding: CustomRecyclerviewBinding =
         CustomRecyclerviewBinding.inflate(LayoutInflater.from(context), this, true)
-    private lateinit var customRecyclerViewAdapter: BaseRecyclerViewAdapter<ForumItem, ItemlistForumBinding>
+    private lateinit var customRecyclerViewAdapter: BaseRecyclerViewAdapter<ListForumItem, ItemlistForumBinding>
 
     private var isLoading = false
     private var currentPage = 0
     private var maxPage = 5
     private var itemsPerPage = 10
-    private val allItems = mutableListOf<ForumItem>()
+    private val allItems = mutableListOf<ListForumItem>()
 
     private var onItemClickListener: OnItemClickListener = {}
 
@@ -43,14 +43,14 @@ class ForumRecyclerView @JvmOverloads constructor(
             bind = { binding, item ->
                 with(binding) {
                     tvTitle.text = item.title
-                    tvSubtitle.text = item.subtitle
+                    tvSubtitle.text = item.content
                     tvLike.text = buildString {
                         append("Likes : ")
-                        append(item.like)
+                        append(item.likes)
                     }
                     tvComments.text = buildString {
                         append("Comments")
-                        append(item.comment)
+                        append(item.comments.size)
                     }
                 }
             },
@@ -76,8 +76,8 @@ class ForumRecyclerView @JvmOverloads constructor(
     private fun loadMoreItems() {
         isLoading = true
         currentPage++
-        val newItems = fetchData(currentPage)
-        allItems.addAll(newItems)
+//        val newItems = fetchData(currentPage)
+//        allItems.addAll(newItems)
         customRecyclerViewAdapter.submitList(allItems.toList())
         isLoading = false
     }
@@ -90,7 +90,7 @@ class ForumRecyclerView @JvmOverloads constructor(
         this.itemsPerPage = itemsPerPage
     }
 
-    fun setInitialItems(items: List<ForumItem>) {
+    fun setInitialItems(items: List<ListForumItem>) {
         allItems.clear()
         allItems.addAll(items)
         customRecyclerViewAdapter.submitList(allItems.toList())
@@ -101,19 +101,5 @@ class ForumRecyclerView @JvmOverloads constructor(
         customRecyclerViewAdapter.setOnItemClickListener(callback)
     }
 
-    fun getAllItems() = customRecyclerViewAdapter.currentList.toMutableList()
-
-    private fun fetchData(page: Int): List<ForumItem> {
-        return List(itemsPerPage) {
-            ForumItem(
-                id = (page - 1) * itemsPerPage + it,
-                user = "User $it",
-                title = "Title ${(page - 1) * itemsPerPage + it}",
-                subtitle = "Subtitle ${(page - 1) * itemsPerPage + it}",
-                like = (page - 1) * itemsPerPage + it,
-                comment = (page - 1) * itemsPerPage + it,
-                popularity = (page - 1) * itemsPerPage + it
-            )
-        }
-    }
+    fun getAllItems() = customRecyclerViewAdapter.currentList.toList()
 }

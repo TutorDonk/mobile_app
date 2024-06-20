@@ -12,31 +12,39 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bangkit.tutordonk.R
+import com.bangkit.tutordonk.component.base.BaseCustomDialog
 import com.bangkit.tutordonk.databinding.FragmentStudentBookingTutorBinding
 import com.bangkit.tutordonk.databinding.PopupRatingBinding
 import com.bangkit.tutordonk.databinding.PopupReportBinding
-import com.bangkit.tutordonk.component.base.BaseCustomDialog
-import com.bangkit.tutordonk.component.historyrecyclerview.model.HistoryItem
-import com.bangkit.tutordonk.model.ListTutor
-import com.bangkit.tutordonk.model.Tutor
+import com.bangkit.tutordonk.model.ListBookingItem
+import com.bangkit.tutordonk.model.TeacherListItem
+import com.bangkit.tutordonk.network.ApiServiceProvider
 import com.bangkit.tutordonk.utils.navigateWithAnimation
 import com.bangkit.tutordonk.utils.setReadOnly
+import com.bangkit.tutordonk.utils.toFormattedDateString
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat.CLOCK_24H
 import com.google.gson.Gson
+import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class BookingTutorFragment : Fragment() {
     private var _binding: FragmentStudentBookingTutorBinding? = null
     private val binding get() = _binding!!
-    private var selectedStudy = ""
 
     private lateinit var navController: NavController
     private lateinit var dialogRating: BaseCustomDialog<PopupRatingBinding>
     private lateinit var dialogReport: BaseCustomDialog<PopupReportBinding>
-    private lateinit var historyItem: HistoryItem
+    private lateinit var historyItem: ListBookingItem
+
+    private val apiServiceProvider: ApiServiceProvider by inject()
+    private var tutorList: List<TeacherListItem> = emptyList()
+    private var selectedStudy = ""
+    private var selectedTutor = ""
+    private var selectedDateTime = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,10 +69,23 @@ class BookingTutorFragment : Fragment() {
         _binding = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        val callback = apiServiceProvider.createCallback<List<String>>(
+            onSuccess = { response -> binding.spinnerStudy.setDefaultEntries(response) }
+        )
+
+        apiServiceProvider.apiService.listStudy().enqueue(callback)
+    }
+
     private fun setLayoutListener() = with(binding) {
         spinnerStudy.setOnItemSelectedListener { study ->
             selectedStudy = study
             changeItemSubStudy()
+            getTeacherList()
+        }
+        spinnerSelectTutor.setOnItemSelectedListener {
+            selectedTutor = it
         }
         mcbSelectSubStudy.setOnCheckedChangeListener { _, isChecked ->
             changeItemSubStudy()
@@ -80,18 +101,18 @@ class BookingTutorFragment : Fragment() {
     }
 
     private fun checkArgumentData() {
-        historyItem = Gson().fromJson(arguments?.getString(ARG_HISTORY_ITEM), HistoryItem::class.java)
+        historyItem = Gson().fromJson(arguments?.getString(ARG_HISTORY_ITEM), ListBookingItem::class.java)
         with(binding) {
             groupRateTutor.visibility = View.VISIBLE
             btnBooking.visibility = View.GONE
             mcbSelectSubStudy.isChecked = true
 
-            spinnerStudy.setDefaultEntries(listOf(historyItem.major))
+            spinnerStudy.setDefaultEntries(listOf(historyItem.course))
             spinnerStudy.setReadOnly()
-            spinnerSubStudy.setDefaultEntries(listOf(historyItem.subMajor))
-            spinnerSubStudy.setReadOnly()
-            spinnerSelectTutor.setDefaultEntries(listOf(historyItem.name))
+            spinnerSelectTutor.setDefaultEntries(listOf(historyItem.namaTutor))
             spinnerSelectTutor.setReadOnly()
+            tietDate.setText(historyItem.createdAt._seconds.toFormattedDateString("MM/dd/yy"))
+            tietDate.setReadOnly()
         }
     }
 
@@ -101,7 +122,7 @@ class BookingTutorFragment : Fragment() {
             bindingInflater = PopupRatingBinding::inflate,
             bind = { binding ->
                 with(binding) {
-                    tvName.text = historyItem.name
+                    tvName.text = historyItem.namaTutor
                     ivStars1.setOnClickListener { setRating(binding, 1) }
                     ivStars2.setOnClickListener { setRating(binding, 2) }
                     ivStars3.setOnClickListener { setRating(binding, 3) }
@@ -110,8 +131,6 @@ class BookingTutorFragment : Fragment() {
                     ivClose.setOnClickListener { dialogRating.cancel() }
                     btnSend.setOnClickListener { dialogRating.cancel() }
                 }
-
-
             })
 
         dialogReport = BaseCustomDialog(
@@ -119,7 +138,7 @@ class BookingTutorFragment : Fragment() {
             bindingInflater = PopupReportBinding::inflate,
             bind = { binding ->
                 with(binding) {
-                    tvName.text = historyItem.name
+                    tvName.text = historyItem.namaTutor
                     ivClose.setOnClickListener { dialogReport.cancel() }
                     btnSend.setOnClickListener { dialogReport.cancel() }
                 }
@@ -150,20 +169,12 @@ class BookingTutorFragment : Fragment() {
     }
 
     private fun goToTutorHome() {
-        val data = ListTutor(
-            List(4) {
-                Tutor(
-                    "Ini Nama $it",
-                    "0821-2183-123$it",
-                    "Jln Raya Cibadak No $it",
-                    "${300000 * it}",
-                    "1. https://drive.google.com/file/d/1x_8T4AQmAP6_j5lf2vJ8B9l76DLr_dSR/view\n2. https://drive.google.com/file/d/1x_8T4AQmAP6_j5lf2vJ8B9l76DLr_dSR/view\n3. https://drive.google.com/file/d/1x_8T4AQmAP6_j5lf2vJ8B9l76DLr_dSR/view"
-                )
-            }
-        )
-
+        val getSelectedTutor = tutorList.find { it.nama == selectedTutor }.also {
+            it?.selectedSubjects = selectedStudy
+            it?.selectedDateTime = selectedDateTime
+        }
         val bundle = bundleOf(
-            BrowseTutorFragment.ARG_TUTOR_DATA to Gson().toJson(data)
+            BrowseTutorFragment.ARG_TUTOR_DATA to Gson().toJson(getSelectedTutor)
         )
 
         navController.navigateWithAnimation(R.id.tutorHomeFragment, args = bundle)
@@ -251,11 +262,35 @@ class BookingTutorFragment : Fragment() {
         picker.addOnPositiveButtonClickListener {
             val hour = picker.hour
             val minute = picker.minute
-            val selectedTime = String.format("%02d:%02d", hour, minute)
-            print(selectedTime)
+            val selectedTime = String.format(Locale.US, "%02d:%02d", hour, minute)
+            selectedDateTime = buildString {
+                append(selectedTime)
+                append(" ")
+                append(binding.tietDate.text.toString().formateDate())
+            }
         }
 
         picker.show(parentFragmentManager, "TAG_TIME_PICKER")
+    }
+
+    private fun getTeacherList() {
+        val callback = apiServiceProvider.createCallback<List<TeacherListItem>>(
+            onSuccess = { response ->
+                val allTutor = response.map { it.nama }
+                tutorList = response
+                binding.spinnerSelectTutor.setDefaultEntries(allTutor)
+            }
+        )
+
+        apiServiceProvider.apiService.listTeacher(selectedStudy).enqueue(callback)
+    }
+
+    private fun String.formateDate(): String {
+        val inputFormat = SimpleDateFormat("MM/dd/yy", Locale.US)
+        val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+
+        val date: Date = inputFormat.parse(this) ?: Date()
+        return outputFormat.format(date)
     }
 
     companion object {

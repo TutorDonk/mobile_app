@@ -1,12 +1,8 @@
 package com.bangkit.tutordonk.network
 
-import com.bangkit.tutordonk.model.TeacherProfileResponse
-import com.bangkit.tutordonk.model.UserProfileResponse
-import com.bangkit.tutordonk.model.UserResponse
+import com.bangkit.tutordonk.model.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiServices {
     @POST("auth/login")
@@ -34,4 +30,40 @@ interface ApiServices {
     fun teacherUpdateProfile(
         @Body fields: TeacherProfileResponse
     ): Call<TeacherProfileResponse>
+
+    @GET("booking/pelajaran")
+    fun listStudy(): Call<List<String>>
+
+    @GET("booking/tutor/{course}")
+    fun listTeacher(
+        @Path("course") course: String
+    ): Call<List<TeacherListItem>>
+
+    @GET("booking")
+    fun bookingHistory(): Call<List<ListBookingItem>>
+
+    @POST("booking")
+    fun bookingTutor(
+        @Body fields: Map<String, String>
+    ): Call<Unit>
+
+    @POST("forum")
+    fun createForum(
+        @Body fields: Map<String, String>
+    ): Call<Unit>
+
+    @GET("forum")
+    fun listForum(): Call<List<ListForumItem>>
+
+    @POST("forum/{id}/comment")
+    fun sendComment(
+        @Path("id") forumId: String,
+        @Body fields: Map<String, String>
+    ): Call<Unit>
+
+    @PATCH("forum/{id}/like")
+    fun sendLikes(
+        @Path("id") forumId: String,
+        @Body fields: Map<String, Boolean>
+    ): Call<Unit>
 }

@@ -14,6 +14,7 @@ import com.bangkit.tutordonk.model.UserResponse
 import com.bangkit.tutordonk.network.ApiServiceProvider
 import com.bangkit.tutordonk.utils.SharedPreferencesHelper
 import com.bangkit.tutordonk.utils.navigateWithAnimation
+import com.bangkit.tutordonk.view.student.StudentHomeActivity
 import com.bangkit.tutordonk.view.teacher.TeacherActivity
 import org.koin.android.ext.android.inject
 
@@ -51,12 +52,19 @@ class LoginFragment : Fragment() {
 
     private fun doLogin() {
         with(binding) {
-            val callback = apiServiceProvider.createCallback<UserResponse> { userResponse ->
-                sharedPreferences.saveToken(userResponse.token)
-                startActivity(Intent(requireContext(), TeacherActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                })
-            }
+            val callback = apiServiceProvider.createCallback<UserResponse>(
+                onSuccess = { userResponse ->
+                    apiServiceProvider.updateToken(userResponse.token)
+                    sharedPreferences.saveRole(userResponse.role)
+                    startActivity(
+                        Intent(
+                            requireContext(),
+                            if (userResponse.role == "siswa") StudentHomeActivity::class.java else TeacherActivity::class.java
+                        ).apply {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        })
+                }
+            )
 
             apiServiceProvider.apiService.authLogin(
                 mapOf(

@@ -1,8 +1,6 @@
 package com.bangkit.tutordonk.view.onboarding.register
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,12 +14,11 @@ import com.bangkit.tutordonk.databinding.FragmentRegisterBinding
 import com.bangkit.tutordonk.databinding.PopupAddCertificateBinding
 import com.bangkit.tutordonk.model.UserResponse
 import com.bangkit.tutordonk.network.ApiServiceProvider
+import com.bangkit.tutordonk.utils.addMoneyTextWatcher
 import com.bangkit.tutordonk.utils.isTextMatchingKeywords
 import com.bangkit.tutordonk.utils.navigateWithAnimation
 import com.bangkit.tutordonk.utils.setReadOnly
 import org.koin.android.ext.android.inject
-import java.text.NumberFormat
-import java.util.Locale
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -32,6 +29,7 @@ class RegisterFragment : Fragment() {
 
     private var isSiswa = false
     private val listOfCertificate: MutableList<String> = mutableListOf()
+    private var listOfStudying: List<String> = emptyList()
     private val apiServiceProvider: ApiServiceProvider by inject()
 
     override fun onCreateView(
@@ -106,6 +104,7 @@ class RegisterFragment : Fragment() {
             groupTeacher.visibility = if (isSiswa.not()) View.VISIBLE else View.GONE
 
             if (isSiswa.not()) {
+                customChip.setChips(listOfStudying)
                 customChip.setOnChipSelectedListener { data ->
                     tietSubjects.setReadOnly()
                     tietSubjects.setText(data.joinToString(separator = ",\n"))
@@ -118,53 +117,9 @@ class RegisterFragment : Fragment() {
             dialogCertificate.show()
         }
 
-        tietPrice.addTextChangedListener(moneyTextWatcher())
+        tietPrice.addMoneyTextWatcher()
 
         btnRegister.setOnClickListener { doRegister() }
-    }
-
-    private fun moneyTextWatcher(): TextWatcher {
-        return object : TextWatcher {
-            private var current = ""
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {/* no-op */
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {/* no-op */
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.toString() != current) {
-                    binding.tietPrice.removeTextChangedListener(this)
-
-                    val locale = Locale("in", "ID")
-                    val numberFormat = NumberFormat.getCurrencyInstance(locale).apply {
-                        maximumFractionDigits = 0
-                        isGroupingUsed = true
-                    }
-
-                    try {
-                        val cleanString = s.toString().replace("[Rp,.]".toRegex(), "")
-                        if (cleanString.isNotEmpty()) {
-                            val parsed = cleanString.toDouble()
-                            val formatted = numberFormat.format(parsed)
-
-                            current = formatted
-                            binding.tietPrice.setText(formatted)
-                            binding.tietPrice.setSelection(formatted.length)
-                        } else {
-                            current = ""
-                            binding.tietPrice.text?.clear()
-                            binding.tietPrice.setSelection(0)
-                        }
-                    } catch (e: NumberFormatException) {
-                        e.printStackTrace()
-                    }
-
-                    binding.tietPrice.addTextChangedListener(this)
-                }
-            }
-        }
     }
 
     private fun doRegister() {
@@ -176,9 +131,11 @@ class RegisterFragment : Fragment() {
                 "role" to isSiswa.roleString()
             )
 
-            val callback = apiServiceProvider.createCallback<UserResponse> { _ ->
-                navController.navigateWithAnimation(R.id.loginFragment, true)
-            }
+            val callback = apiServiceProvider.createCallback<UserResponse>(
+                onSuccess = { _ ->
+                    navController.navigateWithAnimation(R.id.loginFragment, true)
+                }
+            )
 
             apiServiceProvider.apiService.authRegister(reqBody).enqueue(callback)
         }

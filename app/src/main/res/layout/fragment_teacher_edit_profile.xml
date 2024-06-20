@@ -1,229 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="24dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="24dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
 
-    <TextView
-        android:id="@+id/tv_title_name"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="16dp"
-        android:text="@string/title_name"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_name"
-        style="@style/CustomTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_name">
+        <TextView
+            android:id="@+id/tv_title_name"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="16dp"
+            android:text="@string/title_name"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_name"
-            style="@style/CustomEditText"
-            android:hint="@string/title_name" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_name"
+            style="@style/CustomTextInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_name">
 
-    <TextView
-        android:id="@+id/tv_title_email"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="8dp"
-        android:text="@string/title_email"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/til_name" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_name"
+                style="@style/CustomEditText"
+                android:hint="@string/title_name" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_email"
-        style="@style/CustomTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_email">
+        <TextView
+            android:id="@+id/tv_title_email"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/title_email"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/til_name" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_email"
-            style="@style/CustomEditText"
-            android:hint="@string/title_email" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_email"
+            style="@style/CustomTextInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_email">
 
-    <TextView
-        android:id="@+id/tv_title_price"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="8dp"
-        android:text="@string/title_price"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/til_email" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_email"
+                style="@style/CustomEditText"
+                android:hint="@string/title_email" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_price"
-        style="@style/CustomTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_price">
+        <TextView
+            android:id="@+id/tv_title_price"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/title_price"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/til_email" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_price"
-            style="@style/CustomEditText"
-            android:hint="@string/title_price" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_price"
+            style="@style/CustomTextInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_price">
 
-    <TextView
-        android:id="@+id/tv_title_address"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="8dp"
-        android:text="@string/address"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/til_price" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_price"
+                style="@style/CustomEditText"
+                android:hint="@string/title_price" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_address"
-        style="@style/CustomTextInputLayout"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_address">
+        <TextView
+            android:id="@+id/tv_title_address"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/address"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/til_price" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_address"
-            style="@style/CustomEditText"
-            android:hint="@string/address" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_address"
+            style="@style/CustomTextInputLayout"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_address">
 
-    <TextView
-        android:id="@+id/tv_title_phone_number"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="8dp"
-        android:text="@string/phone_number"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/til_address" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_address"
+                style="@style/CustomEditText"
+                android:hint="@string/address" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_phone_number"
-        style="@style/CustomTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_phone_number">
+        <TextView
+            android:id="@+id/tv_title_phone_number"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/phone_number"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/til_address" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_phone_number"
-            style="@style/CustomEditText"
-            android:hint="@string/phone_number"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_phone_number"
+            style="@style/CustomTextInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_phone_number">
 
-    <TextView
-        android:id="@+id/tv_title_education_level"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="8dp"
-        android:text="@string/education_level"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/til_phone_number" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_phone_number"
+                style="@style/CustomEditText"
+                android:hint="@string/phone_number"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_education_level"
-        style="@style/CustomTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_education_level">
+        <TextView
+            android:id="@+id/tv_title_education_level"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/education_level"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/til_phone_number" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_education_level"
-            style="@style/CustomEditText"
-            android:hint="@string/education_level"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_education_level"
+            style="@style/CustomTextInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_education_level">
 
-    <TextView
-        android:id="@+id/tv_title_subjects"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="8dp"
-        android:text="@string/subjects_comma_separated"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/til_education_level" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_education_level"
+                style="@style/CustomEditText"
+                android:hint="@string/education_level"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_subjects"
-        style="@style/CustomTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_subjects">
+        <TextView
+            android:id="@+id/tv_title_subjects"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/subjects_comma_separated"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/til_education_level" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_subjects"
-            style="@style/CustomEditText"
-            android:hint="@string/subjects_comma_separated"
-            android:inputType="textMultiLine" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_subjects"
+            style="@style/CustomTextInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_subjects">
 
-    <com.bangkit.tutordonk.component.CustomChipGroup
-        android:id="@+id/custom_chip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/til_subjects" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_subjects"
+                style="@style/CustomEditText"
+                android:hint="@string/subjects_comma_separated"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_title_achievements"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="8dp"
-        android:text="@string/certifications_achievements_comma_separated"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/custom_chip" />
+        <com.bangkit.tutordonk.component.CustomChipGroup
+            android:id="@+id/custom_chip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/til_subjects" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_achievements"
-        style="@style/CustomTextInputLayout"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_achievements">
+        <TextView
+            android:id="@+id/tv_title_achievements"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/certifications_achievements_comma_separated"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/custom_chip" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_achievements"
-            style="@style/CustomEditText"
-            android:hint="@string/certifications_achievements_comma_separated" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_achievements"
+            style="@style/CustomTextInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_achievements">
 
-    <TextView
-        android:id="@+id/tv_title_gender"
-        style="@style/TheJakartaSans.Bold.13sp"
-        android:layout_marginTop="8dp"
-        android:text="@string/title_gender"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/til_achievements" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_achievements"
+                style="@style/CustomEditText"
+                android:hint="@string/certifications_achievements_comma_separated" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.bangkit.tutordonk.component.CustomSpinner
-        android:id="@+id/spinner_gender"
-        style="@style/BaseSpinnerStyle"
-        android:layout_marginTop="8dp"
-        android:entries="@array/list_gender"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="@id/gl_end"
-        app:layout_constraintStart_toStartOf="@id/gl_start"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_gender" />
+        <TextView
+            android:id="@+id/tv_title_gender"
+            style="@style/TheJakartaSans.Bold.13sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/title_gender"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/til_achievements" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_update"
-        style="@style/CustomButton"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/user_edit_profile_btn_update"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_gender" />
+        <com.bangkit.tutordonk.component.CustomSpinner
+            android:id="@+id/spinner_gender"
+            style="@style/BaseSpinnerStyle"
+            android:layout_marginTop="8dp"
+            android:entries="@array/list_gender"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_gender" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_update"
+            style="@style/CustomButton"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/user_edit_profile_btn_update"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_gender" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

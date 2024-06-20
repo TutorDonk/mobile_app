@@ -1,5 +1,6 @@
 package com.bangkit.tutordonk.view.teacher.editprofile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.bangkit.tutordonk.model.CertificationData
 import com.bangkit.tutordonk.model.TeacherProfileResponse
 import com.bangkit.tutordonk.network.ApiServiceProvider
 import com.bangkit.tutordonk.utils.SharedPreferencesHelper
+import com.bangkit.tutordonk.utils.addMoneyTextWatcher
 import com.bangkit.tutordonk.utils.isTextMatchingKeywords
 import com.bangkit.tutordonk.utils.setReadOnly
 import org.koin.android.ext.android.inject
@@ -30,6 +32,16 @@ class TeacherEditProfileFragment : Fragment() {
     private val sharedPreferences: SharedPreferencesHelper by inject()
 
     private val certificateList: MutableList<CertificationData> = mutableListOf()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        val callback = apiServiceProvider.createCallback<List<String>>(
+            onSuccess = { response -> binding.customChip.setChips(response) }
+        )
+
+        apiServiceProvider.apiService.listStudy().enqueue(callback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -102,23 +114,13 @@ class TeacherEditProfileFragment : Fragment() {
     }
 
     private fun setLayoutListener() = with(binding) {
-        customChip.setChips(
-            listOf(
-                "Kalkulus",
-                "Algoritm",
-                "B Inggris",
-            )
-        )
         customChip.setOnChipSelectedListener { data ->
             tietSubjects.setReadOnly()
             tietSubjects.setText(data.joinToString(separator = ",\n"))
         }
 
+        tietPrice.addMoneyTextWatcher()
         tietAchievements.setOnClickListener {
-            if (certificateList.isEmpty())
-                certificateList.add(
-                    0, CertificationData("", binding.tietAchievements.text.toString())
-                )
             dialogCertificate.show()
         }
         btnUpdate.setOnClickListener { doUpdateData() }
@@ -126,21 +128,25 @@ class TeacherEditProfileFragment : Fragment() {
 
     private fun doUpdateData() {
         with(binding) {
+            val filterDigit = tietPrice.text?.replace("[Rp,.\\s]".toRegex(), "")
             val reqBody = TeacherProfileResponse(
                 tietName.text.toString(),
                 tietEmail.text.toString(),
                 tietPhoneNumber.text.toString(),
                 spinnerGender.value,
                 tietEducationLevel.text.toString().toIntOrNull() ?: 0,
+                filterDigit.toString().toIntOrNull() ?: 0,
                 customChip.value,
                 tietAddress.text.toString(),
                 certificateList
             )
 
-            val callback = apiServiceProvider.createCallback<TeacherProfileResponse> { response ->
-                sharedPreferences.saveUsername(response.nama)
-                navController.popBackStack()
-            }
+            val callback = apiServiceProvider.createCallback<TeacherProfileResponse>(
+                onSuccess = { response ->
+                    sharedPreferences.saveUsername(response.nama)
+                    navController.popBackStack()
+                }
+            )
 
             apiServiceProvider.apiService.teacherUpdateProfile(reqBody).enqueue(callback)
         }

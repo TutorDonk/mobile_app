@@ -13,16 +13,24 @@ class ApiServiceProvider(private val context: Context) : KoinComponent {
     private val networkClient: NetworkClient by inject()
 
     val apiService: ApiServices
-        get() = networkClient.retrofit.create(ApiServices::class.java)
+        get() = networkClient.getRetrofit().create(ApiServices::class.java)
 
-    fun <T> createCallback(onSuccess: (response: T) -> Unit): Callback<T> {
+    fun updateToken(newToken: String) = networkClient.updateToken(newToken)
+
+    fun <T> createCallback(
+        onSuccess: (response: T) -> Unit,
+        onFailed: ((Throwable) -> Unit)? = null
+    ): Callback<T> {
         return object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
-                if (response.handleResponse(context)) response.body()?.let { onSuccess(it) }
+                if (response.handleResponse(context)) {
+                    response.body()?.let { onSuccess(it) }
+                } else onFailed?.invoke(Throwable(message = "Something went wrong !"))
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
-                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                if (onFailed != null) onFailed.invoke(t)
+                else Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
             }
         }
     }

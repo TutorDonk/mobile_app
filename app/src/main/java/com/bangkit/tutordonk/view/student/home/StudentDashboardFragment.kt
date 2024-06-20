@@ -9,14 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bangkit.tutordonk.R
-import com.bangkit.tutordonk.component.forumrecyclerview.model.ForumItem
 import com.bangkit.tutordonk.databinding.FragmentStudentDashboardBinding
+import com.bangkit.tutordonk.model.ListForumItem
 import com.bangkit.tutordonk.model.UserProfileResponse
 import com.bangkit.tutordonk.network.ApiServiceProvider
 import com.bangkit.tutordonk.utils.SharedPreferencesHelper
 import com.bangkit.tutordonk.utils.isAllFieldsNotEmpty
 import com.bangkit.tutordonk.utils.navigateWithAnimation
-import com.bangkit.tutordonk.view.detailforum.DetailForumActivity
+import com.bangkit.tutordonk.view.forum.ForumActivity
 import com.bangkit.tutordonk.view.student.StudentHomeActivity
 import com.google.gson.Gson
 import org.koin.android.ext.android.inject
@@ -34,6 +34,22 @@ class StudentDashboardFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         checkIsAllFieldNotEmpty()
+
+        val callback = apiServiceProvider.createCallback<List<ListForumItem>>(
+            onSuccess = { response ->
+                with(binding) {
+                    rvForumHottest.setMaxPage(5)
+                    rvForumHottest.setInitialItems(response)
+                    rvForumHottest.setOnItemClickListener { forumItem ->
+                        startActivity(Intent(requireContext(), ForumActivity::class.java).also {
+                            it.putExtra(ForumActivity.INTENT_FORUM_ITEM, Gson().toJson(forumItem))
+                        })
+                    }
+                }
+            }
+        )
+
+        apiServiceProvider.apiService.listForum().enqueue(callback)
     }
 
     override fun onCreateView(
@@ -55,26 +71,20 @@ class StudentDashboardFragment : Fragment() {
     }
 
     private fun setLayoutListener() = with(binding) {
-        rvForumHottest.setItemsPerPage(10)
-        rvForumHottest.setMaxPage(3)
-        rvForumHottest.setInitialItems(listOf(ForumItem(0, "User 1", "Initial Title", "Initial Subtitle", 1, 1, 1)))
-        rvForumHottest.setOnItemClickListener { data ->
-            startActivity(Intent(requireContext(), DetailForumActivity::class.java).also {
-                it.putExtra(DetailForumActivity.INTENT_FORUM_ITEM, Gson().toJson(data))
-            })
-        }
-
         cvBookingTutor.setOnClickListener { navController.navigateWithAnimation(R.id.homeFragmentTobookingTutorFragment) }
-        cvForumHistory.setOnClickListener { navController.navigateWithAnimation(R.id.homeFragmentTostudyForumFragment) }
+        cvForumHistory.setOnClickListener { startActivity(Intent(requireContext(), ForumActivity::class.java)) }
         cvStudyHistory.setOnClickListener { navController.navigateWithAnimation(R.id.studyHistoryFragment) }
     }
 
     private fun checkIsAllFieldNotEmpty() {
-        val callback = apiServiceProvider.createCallback<UserProfileResponse> { response ->
-            shareVM().name.value = response.nama
-            sharedPreferences.saveUsername(response.nama)
-            if (response.isAllFieldsNotEmpty().not()) navController.navigateWithAnimation(R.id.editProfileFragment)
-        }
+        val callback = apiServiceProvider.createCallback<UserProfileResponse>(
+            onSuccess = { response ->
+                shareVM().name.value = response.nama
+                sharedPreferences.saveUsername(response.nama)
+                if (response.isAllFieldsNotEmpty().not()) navController.navigateWithAnimation(R.id.editProfileFragment)
+            },
+            onFailed = { navController.navigateWithAnimation(R.id.editProfileFragment) }
+        )
         apiServiceProvider.apiService.userGetProfile().enqueue(callback)
     }
 }

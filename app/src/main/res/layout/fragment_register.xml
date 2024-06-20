@@ -271,12 +271,14 @@
                 style="@style/TheJakartaSans.Bold.13sp"
                 android:layout_marginTop="8dp"
                 android:text="@string/subjects_comma_separated"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintTop_toBottomOf="@id/til_phone_number" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_subjects"
                 style="@style/CustomTextInputLayout"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_subjects">
@@ -338,7 +340,7 @@
                 android:id="@+id/group_teacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="tv_title_price, til_price, tv_title_subjects, til_subjects, tv_title_achievements, til_achievements, custom_chip" />
+                app:constraint_referenced_ids="tv_title_price, til_price, tv_title_achievements, til_achievements, custom_chip" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bangkit.tutordonk.component.forumrecyclerview.model.ForumItem
 import com.bangkit.tutordonk.databinding.FragmentStudyForumBinding
-import com.bangkit.tutordonk.view.detailforum.DetailForumActivity
+import com.bangkit.tutordonk.view.forum.ForumActivity
 import com.google.gson.Gson
 
 class StudyForumFragment : Fragment() {
@@ -72,22 +71,22 @@ class StudyForumFragment : Fragment() {
 
     private fun applySort(selectedSort: String) = with(binding) {
         toggleSortOptions()
-        val sortedItems = rvForum.getAllItems().sortedByDescending { item ->
-            when (selectedSort.lowercase()) {
-                "popularitas" -> item.popularity
-                "like" -> item.like
-                else -> item.comment
-            }
-        }
-        rvForum.setInitialItems(sortedItems)
+//        val sortedItems = rvForum.getAllItems().sortedByDescending { item ->
+//            when (selectedSort.lowercase()) {
+//                "popularitas" -> item.popularity
+//                "like" -> item.like
+//                else -> item.comment
+//            }
+//        }
+//        rvForum.setInitialItems(sortedItems)
     }
 
     private fun setupRecyclerView() = with(binding) {
         rvForum.setMaxPage(5)
-        rvForum.setInitialItems(listOf(ForumItem(0, "User 1", "Initial Title", "Initial Subtitle", 0, 0, 0)))
+//        rvForum.setInitialItems(listOf(ForumItem(0, "User 1", "Initial Title", "Initial Subtitle", 0, 0, 0)))
         rvForum.setOnItemClickListener { forumItem ->
-            startActivity(Intent(requireContext(), DetailForumActivity::class.java).also {
-                it.putExtra(DetailForumActivity.INTENT_FORUM_ITEM, Gson().toJson(forumItem))
+            startActivity(Intent(requireContext(), ForumActivity::class.java).also {
+                it.putExtra(ForumActivity.INTENT_FORUM_ITEM, Gson().toJson(forumItem))
             })
         }
     }

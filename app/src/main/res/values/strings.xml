@@ -71,6 +71,9 @@
     <string name="title_forum">Forum</string>
     <string name="title_email">Email</string>
     <string name="title_gender">Jenis Kelamin</string>
+    <string name="desc_create_forum">Create Forum</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_content">Content</string>
 
     <string-array name="list_study_array">
         <item>Kalkulus</item>

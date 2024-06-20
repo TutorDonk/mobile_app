@@ -6,5 +6,5 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    app:chipSpacing="8dp"
-    app:singleLine="true" />
+    app:chipSpacingVertical="1dp"
+    app:chipSpacingHorizontal="8dp"/>

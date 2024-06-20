@@ -56,10 +56,12 @@ class StudentEditProfileFragment : Fragment() {
                 "gender" to spinnerGender.value,
             )
 
-            val callback = apiServiceProvider.createCallback<UserProfileResponse> { response ->
-                sharedPreferences.saveUsername(response.nama)
-                navController.popBackStack()
-            }
+            val callback = apiServiceProvider.createCallback<UserProfileResponse>(
+                onSuccess = { response ->
+                    sharedPreferences.saveUsername(response.nama)
+                    navController.popBackStack()
+                }
+            )
 
             apiServiceProvider.apiService.userUpdateProfile(reqBody).enqueue(callback)
         }

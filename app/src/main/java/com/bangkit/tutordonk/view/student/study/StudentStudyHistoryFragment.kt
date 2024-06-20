@@ -1,31 +1,37 @@
-package com.bangkit.tutordonk.view.student.study.forum
+package com.bangkit.tutordonk.view.student.study
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.bangkit.tutordonk.databinding.FragmentStudyForumBinding
-import com.bangkit.tutordonk.component.forumrecyclerview.model.ForumItem
-import com.bangkit.tutordonk.view.detailforum.DetailForumActivity
+import com.bangkit.tutordonk.R
+import com.bangkit.tutordonk.databinding.FragmentStudentStudyHistoryBinding
+import com.bangkit.tutordonk.model.ListBookingItem
+import com.bangkit.tutordonk.network.ApiServiceProvider
+import com.bangkit.tutordonk.utils.navigateWithAnimation
+import com.bangkit.tutordonk.view.student.booking.BookingTutorFragment
 import com.google.gson.Gson
+import org.koin.android.ext.android.inject
 
-class StudyForumFragment : Fragment() {
-
-    private var _binding: FragmentStudyForumBinding? = null
+class StudentStudyHistoryFragment : Fragment() {
+    private var _binding: FragmentStudentStudyHistoryBinding? = null
     private val binding get() = _binding!!
+
     private var isSortClicked = false
     private var spinnerInteracted = false
     private lateinit var navController: NavController
+
+    private val apiServiceProvider: ApiServiceProvider by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStudyForumBinding.inflate(inflater, container, false)
+        _binding = FragmentStudentStudyHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,10 +46,25 @@ class StudyForumFragment : Fragment() {
         _binding = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        val callback = apiServiceProvider.createCallback<List<ListBookingItem>>(
+            onSuccess = {
+                with(binding) {
+                    rvHistory.setInitialItems(it)
+                    rvHistory.setOnItemClickListener { data ->
+                        if (data.status == 0) navigateToBookingTutor(data)
+                    }
+                }
+            }
+        )
+
+        apiServiceProvider.apiService.bookingHistory().enqueue(callback)
+    }
+
     private fun setupUI() {
         setupSortIcon()
         setupSortSpinner()
-        setupRecyclerView()
     }
 
     private fun setupSortIcon() = with(binding) {
@@ -72,23 +93,20 @@ class StudyForumFragment : Fragment() {
 
     private fun applySort(selectedSort: String) = with(binding) {
         toggleSortOptions()
-        val sortedItems = rvForum.getAllItems().sortedByDescending { item ->
+        val sortedItems = rvHistory.getAllItems().sortedByDescending { item ->
             when (selectedSort.lowercase()) {
-                "popularitas" -> item.popularity
-                "like" -> item.like
-                else -> item.comment
+                "matkul" -> item.course
+                else -> item.status.toString()
             }
         }
-        rvForum.setInitialItems(sortedItems)
+        rvHistory.setInitialItems(sortedItems)
     }
 
-    private fun setupRecyclerView() = with(binding) {
-        rvForum.setMaxPage(5)
-        rvForum.setInitialItems(listOf(ForumItem(0, "User 1", "Initial Title", "Initial Subtitle", 0, 0, 0)))
-        rvForum.setOnItemClickListener { forumItem ->
-            startActivity(Intent(requireContext(), DetailForumActivity::class.java).also {
-                it.putExtra(DetailForumActivity.INTENT_FORUM_ITEM, Gson().toJson(forumItem))
-            })
-        }
+    private fun navigateToBookingTutor(data: ListBookingItem) {
+        val args = bundleOf(
+            BookingTutorFragment.ARG_HISTORY_ITEM to Gson().toJson(data),
+            BookingTutorFragment.ARG_FROM_HISTORY to true
+        )
+        navController.navigateWithAnimation(R.id.bookingTutorFragment, args = args)
     }
 }

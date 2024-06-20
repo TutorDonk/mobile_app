@@ -11,7 +11,6 @@ val appModule = module {
 }
 
 val networkModule = module {
-    single { get<SharedPreferencesHelper>().getToken() }
-    single { NetworkClient(get(), get()) }
+    single { NetworkClient(get()) }
     single { ApiServiceProvider(get()) }
 }
